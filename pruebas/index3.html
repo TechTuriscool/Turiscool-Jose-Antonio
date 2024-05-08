@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <script type="module" src="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.0/index.js"></script>
+    <style>
+      .custom-carousel {
+    width: 95vw;
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    padding: 10px;
+    margin-bottom: 100px;
+    background-color: white;
+    border: solid 2px #05BFAD;
+    height: 600px;
+}
+
+.custom-carousel img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.custom-carousel img:hover {
+    transform: scale(1.1);
+}
+
+::-webkit-scrollbar {
+    cursor: pointer;
+}
+
+.custom-carousel::-webkit-scrollbar {
+    height: 40px;
+
+}
+
+.custom-carousel::-webkit-scrollbar-thumb {
+    background: #05BFAD;
+    background-clip: content-box;
+    border-radius: 30px;
+    border: solid 15px transparent;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: system-ui,  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.image-card {
+    border-radius: 10px;
+}
+
+.card {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 300px;
+    height: 520px;
+    border: 10px solid #F3F8FF;
+    margin: 20px;
+    margin-left: 0px;
+    margin-right: 5px;
+    background-color: #F3F8FF;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+    transition: 0.4s;
+
+
+}
+
+.card:hover {
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+.card button {
+    padding: 12px 16px;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #05BFAD;
+    border-radius: 5px;
+    color: #F3F8FF;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.4s;
+    position: absolute;
+    bottom: 0;
+}
+
+.card button:hover {
+    background-color: #006791;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.card h2 {
+
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card p {
+    height: 150px ;
+    width: 90%;
+    margin: 10px;
+    margin-left: 5%;
+    text-align: left;
+    text-wrap: pretty;
+    overflow: hidden;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    transition: 0.4s;
+}
+
+h2 {
+    color: #131313;
+    margin-bottom: 50px;
+}
+
+#heroImage {
+    width: 100%;
+    height: 350px;
+    position: relative;
+  	margin-top: -120px;
+}
+
+#heroImage img:first-child{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+#heroImage::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top, #252525, transparent);
+}
+
+.container {
+    margin-top: -30px;
+    padding-top: 30px;
+    background: linear-gradient( #252525, #006791 );
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+      
+
+      
+.titleCard {
+    font-size: 32px;
+    color: white;
+    font-weight: bold;
+    margin: 50px;
+}
+      
+.logo{
+    z-index: 102;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    border-radius: 20px;
+   	width: 20%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+  }
+
+  #userInfo {
+      position: absolute;
+      left: 15vw;
+      top: 100px;
+      z-index: 100;
+      background-color: #ffffff9b;
+        border-radius: 20px;
+  }
+      
+#userInfo p {
+    font-size: 20px;
+    z-index: 101;
+    margin-left: 15px;
+    color: black;
+    font-weight: 500;
+     text-shadow: 2px 2px 50px rgba(0,0,0,1);
+  padding: 10px;
+  padding-top: 15px;
+
+}
+
+
+  custom-user-score .userProgress {
+    width: 300px;
+    height: 70%;
+    background-color: transparent;
+    border: 0px ;
+  }
+  
+  custom-user-score .userProgress div{
+    font-size: 13px;
+    padding: 5px;
+  }
+
+  custom-user-score .userProgress h2 {
+    display: none;
+  }
+
+  custom-user-score .userProgress svg {
+    width: 20px;
+    height: 20px;
+    padding: 0%;
+    margin: 0%;
+    margin-bottom: 10px;
+
+  }
+
+  custom-user-score .progress div {
+    padding: 5px;
+    height: 80%;
+    width: 34%;
+    border: 0px;
+    content: "asd";
+  }
+      
+  custom-user-score .progress {
+        background-color: transparent;
+
+   }
+
+
+   /* Responsive */
+   @media screen and (max-width: 1070px) {
+    custom-user-score .userProgress div {
+      font-size: 9px;
+    }   
+   }
+
+   @media screen and (max-width: 700px) {
+    custom-user-score .progress {
+            flex-direction: row;
+            width: 100%;
+        }
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.0/customUserScore/styleUserScore.css">
+</head>
+<body>
+    <div id="userInfo">
+        
+    </div>
+  <div id="heroImage">
+        <img src="https://www.vinccihoteles.com/blog/wp-content/uploads/2019/06/Circuito-Thalassa.jpg">
+        <img class="logo" src="https://i.ibb.co/wLCddp4/ASDASDASD-2-Photoroom.png">
+    </div>
+    <div id="difuminado"></div>
+    <div class="container">
+
+    </div>
+    <script>
+  const url = "https://academy.turiscool.com/admin/api/"
+const token = "Bearer 17xa7adwlycG4qrbRatBdCHW41xtl9jNyaBq4d45";
+const lwId = "62b182eea31d8d9863079f42";
+
+
+const requestOptions = {
+   method: "GET",
+   headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+      "Lw-Client": lwId,
+   },
+};
+
+let pages = 0;
+let courses = [];
+let category = ['Alimentos y bebidas',
+    'Marketing',
+    'Tecnología para hoteles',
+    'Soft Skills',
+    'Housekeeping'];
+let coursesByCategory = [];
+let urlCourse = "https://academy.turiscool.com/course/";
+
+function Start() {
+    fetchPages();
+    showHelloUser();
+
+}
+
+function fetchPages() {
+    fetch(`${url}/v2/courses`, requestOptions)
+    .then(response => response.json())
+    .then(metaData => {
+        pages = metaData.meta.totalPages;
+        
+        fetchCourses();
+    });
+}
+
+
+function fetchCourses() {
+    let fetchPromises = [];
+    for (let i = 0; i < pages; i++) {
+        fetchPromises.push(
+            fetch(`${url}/v2/courses?page=${i}`, requestOptions)
+            .then(response => response.json())
+            .then(coursesData => {
+                courses.push(coursesData.data);
+            })
+        );
+    }
+
+    Promise.all(fetchPromises)
+    .then(() => {
+        OrderByCategory();
+    });
+}
+
+function OrderByCategory() {
+    for (let k = 0; k < category.length; k++) {
+        let coursesCategory = [];
+        for (let i = 0; i < courses.length; i++) {
+            for (let j = 0; j < courses[i].length; j++) {
+                if (courses[i][j].categories.includes(category[k])) {
+                    if (!courses[i][j].title.toLowerCase().includes("proced") && !courses[i][j].title.toLowerCase().includes("onboard") && !courses[i][j].title.toLowerCase().includes("up-selling")) {
+                        coursesCategory.push(courses[i][j]);
+                    }
+                }
+            }
+        }
+        coursesByCategory.push(coursesCategory);
+    }
+
+    ShowRecomendedCourses();
+    ShowCourses();
+}
+
+function ShowRecomendedCourses(){
+    let customCarousel = document.createElement("custom-carousel");
+    customCarousel.classList.add("custom-carousel");
+
+    let container = document.querySelector(".container");
+
+    let category = document.createElement("div");
+    category.classList.add("category");
+        
+    container.appendChild(category);
+    let title = document.createElement("div");
+    title.classList.add("titleCard");
+    category.appendChild(title);
+    container.appendChild(category);
+    title.innerHTML = "Recomendados";
+
+
+    for(let i = 0; i < 10; i++){
+        // Recoger un numero random de 0 a 50
+        let numero1 = Math.floor(Math.random() * 50);
+        let numero2 = Math.floor(Math.random() * courses.length);
+
+        // Crear un custom-card
+        let customCard = document.createElement("custom-card");
+        customCard.setAttribute("title", courses[numero2][numero1].title);
+        customCard.setAttribute("description", courses[numero2][numero1].description === null ? "" : courses[numero2][numero1].description);
+        customCard.setAttribute("image", courses[numero2][numero1].courseImage);
+        customCard.setAttribute("navigation", urlCourse + courses[numero2][numero1].identifiers.slug);
+        // Añadirlo al contenedor
+        customCarousel.appendChild(customCard);
+    }
+    category.appendChild(customCarousel);
+
+}
+
+function ShowCourses() {
+    let container = document.querySelector(".container");
+    
+
+    for (let i = 0; i < coursesByCategory.length; i++) {
+        let categoryCourses = coursesByCategory[i];
+        let categoryDiv = document.createElement("div");
+        categoryDiv.innerHTML = `<div class='titleCard'>${category[i]}</div>`;
+        categoryDiv.classList.add("category");
+        let carouselDiv = document.createElement("div");
+        carouselDiv.classList.add("custom-carousel");
+
+        for (let j = 0; j < categoryCourses.length; j++) {
+            let course = categoryCourses[j];
+            let customCard = document.createElement("custom-card");
+            customCard.setAttribute("title", course.title);
+            customCard.setAttribute("description", course.description === null ? "" : course.description);
+            customCard.setAttribute("image", course.courseImage);
+            customCard.setAttribute("navigation", urlCourse + course.identifiers.slug);
+            carouselDiv.appendChild(customCard);
+        }
+
+        categoryDiv.appendChild(carouselDiv);
+        container.appendChild(categoryDiv);
+    }
+}
+
+function showHelloUser(){
+    let userInfo = document.getElementById("userInfo");
+    // Recoger el contenido de un elemento ID helloUser
+    let userName = document.getElementById('el_1714734182005_487').textContent;
+    let userID = document.getElementById('el_1714734184272_494').textContent;
+
+    userInfo.innerHTML = `
+    <p id="helloUser">Hola ${userName}</p>
+    <custom-user-score user-id="${userID}"></custom-user-score>
+    `;
+}
+
+
+// Esperar a que el DOM esté listo
+document.addEventListener('DOMContentLoaded', Start);
+
+  </script>
+</body>
+</html>
