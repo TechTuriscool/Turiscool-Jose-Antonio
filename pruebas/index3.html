@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-      <script type="module" src="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.4/index.js"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.0/index.js"></script>
     <style>
       .custom-carousel {
     width: 95vw;
@@ -320,7 +320,7 @@ let coursesSort = [];
 let startCourses = [];
 let coursesUser = [];
 let urlCourse = "https://academy.turiscool.com/course/";
-let filtro = ["garden","onboarding","amo","feet","bienvenidos","formacion","MBA","precedimientos","revenuepro","sweet"]
+let filtro = ["garden","onboarding","amo","feet","bienvenidos","MBA","precedimientos","revenuepro","sweet"]
 
 function Start() {
     fetchPages();
@@ -346,7 +346,7 @@ function fetchCourses() {
             .then(coursesData => {
                 // Añadir los cursos que no estén ya en el array
                 for (let j = 0; j < coursesData.data.length; j++) {
-                    if (!courses.find(course => course.id.toLowerCase() === coursesData.data[j].id.toLowerCase()) && !filtro.some(item => coursesData.data[j].id.toLowerCase().includes(item.toLowerCase()))) {  
+                    if (!courses.find(course => course.id.toLowerCase() === coursesData.data[j].id.toLowerCase()) && !coursesData.data[j].id.startsWith("formac") &&  !filtro.some(item => coursesData.data[j].id.toLowerCase().includes(item.toLowerCase()))) {  
                         courses.push(coursesData.data[j]);
                     }
                 }
@@ -465,7 +465,7 @@ function ShowCourses() {
     title.classList.add("titleCard");
     category.appendChild(title);
     container.appendChild(category);
-    title.innerHTML = "Progreso en los cursos:";
+    title.innerHTML = "Mis cursos";
 
 
     console.log(coursesUser.length);
@@ -479,9 +479,8 @@ function ShowCourses() {
             customCard.setAttribute("description",coursesUser[i].description === null ? "" : coursesUser[i].description);
             customCard.setAttribute("image", coursesUser[i].courseImage);
             customCard.setAttribute("navigation", urlCourse + coursesUser[i].identifiers.slug);
-            customCard.setAttribute("progress", coursesUser[i].progress_rate);
 
-            category.appendChild(customCard);
+            customCarousel.appendChild(customCard);
         }
 
     }
