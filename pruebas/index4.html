@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <script type="module" src="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.0/index.js"></script>
+    <style>
+      .custom-carousel {
+    width: 95vw;
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    padding: 10px;
+    margin-bottom: 100px;
+    background-color: white;
+    border: solid 2px #05BFAD;
+    height: 600px;
+}
+
+.custom-carousel img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.custom-carousel img:hover {
+    transform: scale(1.1);
+}
+
+::-webkit-scrollbar {
+    cursor: pointer;
+}
+
+.custom-carousel::-webkit-scrollbar {
+    height: 40px;
+
+}
+
+.custom-carousel::-webkit-scrollbar-thumb {
+    background: #05BFAD;
+    background-clip: content-box;
+    border-radius: 30px;
+    border: solid 15px transparent;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: system-ui,  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.image-card {
+    border-radius: 10px;
+}
+
+.card {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 300px;
+    height: 520px;
+    border: 10px solid #F3F8FF;
+    margin: 20px;
+    margin-left: 0px;
+    margin-right: 5px;
+    background-color: #F3F8FF;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+    transition: 0.4s;
+
+
+}
+
+.card:hover {
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+.card button {
+    padding: 12px 16px;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #05BFAD;
+    border-radius: 5px;
+    color: #F3F8FF;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.4s;
+    position: absolute;
+    bottom: 0;
+}
+
+.card button:hover {
+    background-color: #006791;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.card h2 {
+
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card p {
+    height: 150px ;
+    width: 90%;
+    margin: 10px;
+    margin-left: 5%;
+    text-align: left;
+    text-wrap: pretty;
+    overflow: hidden;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    transition: 0.4s;
+}
+
+h2 {
+    color: #131313;
+    margin-bottom: 50px;
+}
+
+#heroImage {
+    width: 100%;
+    height: 350px;
+    position: relative;
+  	margin-top: -120px;
+}
+
+#heroImage img:first-child{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+#heroImage::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top, #252525, transparent);
+}
+
+.container {
+    margin-top: -30px;
+    padding-top: 30px;
+    background: linear-gradient( #252525, #006791 );
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+            
+.titleCard {
+    font-size: 32px;
+    color: white;
+    font-weight: bold;
+    margin: 50px;
+}
+      
+.logo{
+    z-index: 102;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    border-radius: 20px;
+   	width: 20%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+  }
+
+  #userInfo {
+      position: absolute;
+      left: 15vw;
+      top: 100px;
+      z-index: 100;
+      background-color: #ffffff9b;
+        border-radius: 20px;
+  }
+      
+#userInfo p {
+    font-size: 20px;
+    z-index: 101;
+    margin-left: 15px;
+    color: black;
+    font-weight: 500;
+     text-shadow: 2px 2px 50px rgba(0,0,0,1);
+  padding: 10px;
+  padding-top: 15px;
+
+}
+
+
+  custom-user-score .userProgress {
+    width: 300px;
+    height: 70%;
+    background-color: transparent;
+    border: 0px ;
+  }
+  
+  custom-user-score .userProgress div{
+    font-size: 13px;
+    padding: 5px;
+  }
+
+  custom-user-score .userProgress h2 {
+    display: none;
+  }
+
+  custom-user-score .userProgress svg {
+    width: 20px;
+    height: 20px;
+    padding: 0%;
+    margin: 0%;
+    margin-bottom: 10px;
+
+  }
+
+  custom-user-score .progress div {
+    padding: 5px;
+    height: 80%;
+    width: 34%;
+    border: 0px;
+    content: "asd";
+  }
+      
+  custom-user-score .progress {
+        background-color: transparent;
+
+   }
+
+   
+    .navbar {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 70%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px;
+        border-radius: 10px;
+    }
+
+    .menu-icon {
+        padding: 20px;
+        display: block;
+        cursor: pointer;
+    }
+
+    .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        max-height: 500px;
+        width: 100%;
+        overflow-y: auto;
+
+    }
+
+    .menu li {
+        padding: 10px 10px;
+        width: 90%;
+        text-align: left;
+        border-bottom: 1px solid #f4f4f4;
+
+    }
+
+    .menu li:hover {
+        background-color: #05BFAD;
+        color: white
+    }
+
+
+
+    .menu.active {
+        display: flex;
+    }
+
+    .search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .containerCourseProgress input[type="text"] {
+        padding: 10px;
+        width: 70%;
+        border: 1px solid #006791;
+        border-radius: 10px;
+    }
+
+    .containerCourseProgress button, .modalbutton {
+        background-color: #006791;
+        color: #ffffff;
+        border: none;
+        padding: 10px 30px;
+        cursor: pointer;
+        margin-left: 10px;
+        border-radius: 10px;
+        transition: 0.4s;
+    }
+
+    .containerCourseProgress button:last-child {
+        background-color: #05BFAD;
+    }
+
+    .containerCourseProgress button:last-child:hover {
+        background-color: white;
+        border: solid 1px #05BFAD;
+        color:  #05BFAD;
+        transition: 0.4s;
+    }
+
+.containerCourseProgress{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+   /* Responsive */
+   @media screen and (max-width: 1070px) {
+    custom-user-score .userProgress div {
+      font-size: 9px;
+    }   
+   }
+
+   @media screen and (max-width: 700px) {
+    custom-user-score .progress {
+            flex-direction: row;
+            width: 100%;
+        }
+    }
+
+    .modal {
+    display: none;
+    position: fixed;
+    width: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.modal-active {
+    display: block;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.modal-overlay-active {
+    display: block;
+}
+
+.modalDescripcion {
+    font-size: 16px;
+    margin-top: 0px;
+}
+
+.contenedorPrincipal {
+    width: 80%;
+    display: flex;
+    margin-top: 20px;
+}
+
+.contenedorPrincipal div {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.0/customUserScore/styleUserScore.css">
+</head>
+<body>
+    <div id="userInfo">
+        
+    </div>
+  <div id="heroImage">
+        <img src="https://i.ibb.co/sw91qd1/hammocks-with-palm-trees.jpg">
+        <img class="logo" src="https://i.ibb.co/wLCddp4/ASDASDASD-2-Photoroom.png">
+    </div>
+    <div id="difuminado"></div>
+    <div class="containerCourseProgress">
+        <button class="search-btn" onclick="showContainer()">Mi progreso</button>
+    </div>
+    <div class="container">
+    </div>
+    <script>
+  const url = "https://academy.turiscool.com/admin/api/"
+    const token = "Bearer 17xa7adwlycG4qrbRatBdCHW41xtl9jNyaBq4d45";
+    const lwId = "62b182eea31d8d9863079f42";
+    let userId = "65d3763f741db932c906da1c";
+
+
+const requestOptions = {
+   method: "GET",
+   headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+      "Lw-Client": lwId,
+   },
+};
+
+let pages = 0;
+let deployCoursesActive = false;
+let searchActive = false;
+let pagesUser = 0;
+let totalUsers = 0;
+let usersPerCourse = 0;
+let courses = [];
+let coursesSort = [];
+let startCourses = [];
+let coursesUser = [];
+let coursesUserFilter = [];
+let progressUser = [];
+let urlCourse = "https://academy.turiscool.com/course/";
+let filtro = ["garden","onboarding","amo","feet","bienvenidos","MBA","precedimientos","revenuepro","sweet"]
+
+function Start() {
+    //userId = document.getElementById('el_1714734184272_494').textContent;
+
+    fetchPages();
+    //showHelloUser();
+}
+
+function fetchPages() {
+    fetch(`${url}/v2/courses`, requestOptions)
+    .then(response => response.json())
+    .then(metaData => {
+        pages = metaData.meta.totalPages;
+        fetchCourses();
+    });
+}
+
+
+function fetchCourses() {
+    let fetchPromises = [];
+    for (let i = 1; i <= pages; i++) {
+        fetchPromises.push(
+            fetch(`${url}/v2/courses?page=${i}`, requestOptions)
+            .then(response => response.json())
+            .then(coursesData => {
+                // Añadir los cursos que no estén ya en el array
+                for (let j = 0; j < coursesData.data.length; j++) {
+                    if (!courses.find(course => course.id.toLowerCase() === coursesData.data[j].id.toLowerCase()) && !coursesData.data[j].id.startsWith("formac") &&  !filtro.some(item => coursesData.data[j].id.toLowerCase().includes(item.toLowerCase()))) {  
+                        courses.push(coursesData.data[j]);
+                    }
+                }
+            })
+        );
+    }
+
+    Promise.all(fetchPromises)
+    .then(() => {
+        fetchPagesUser();
+        OrderByDate();
+    });
+}
+
+function fetchPagesUser() {
+    fetch(`${url}/v2/users/${userId}/progress`, requestOptions)
+    .then(response => response.json())
+    .then(metaData => {
+        pagesUser = metaData.meta.totalPages;
+        
+        fetchProgress();
+    });
+}
+
+function fetchProgress(){
+    let fetchPromises = [];
+
+    for (let i = 0; i < pages; i++) {
+        fetchPromises.push(
+            fetch(`${url}/v2/users/${userId}/progress?page=${i}`, requestOptions)
+            .then(response => response.json())
+            .then(progressData => {
+                for (let j = 0; j < progressData.data.length; j++) {
+                    if (!startCourses.find(course => course.course_id === progressData.data[j].course_id) && progressData.data[j].progress_rate > 0 && progressData.data[j].progress_rate < 100 ) {  
+                        startCourses.push(progressData.data[j]);
+                    } else if(!progressUser.find(course => course.course_id === progressData.data[j].course_id)) {
+                        progressUser.push(progressData.data[j]);
+                    }
+                }
+            })
+        );
+    }
+    Promise.all(fetchPromises)
+    .then(() => {
+        console.log(startCourses);
+        coursesFilter();
+        ShowCourses(); 
+        ShowNewCourses();
+    });
+
+}
+
+function coursesFilter(){
+    for(let i = 0; i < progressUser.length; i++) {
+        foundCourse = courses.find(course => course.id === progressUser[i].course_id);
+        if (foundCourse) {
+            foundCourse = {...foundCourse, progress_rate: progressUser[i].progress_rate};
+            coursesUserFilter.push(foundCourse);
+        }
+    }
+
+    console.log('Soy todos los cursos del usuario');
+    console.log(coursesUserFilter);
+}
+
+function OrderByDate() {
+    coursesSort = [...courses];
+
+    coursesSort.sort((a, b) => {
+        return new Date(b.created) - new Date(a.created);
+    });
+
+}
+
+function ShowNewCourses(){
+    let customCarousel = document.createElement("custom-carousel");
+    customCarousel.classList.add("custom-carousel");
+
+    let container = document.querySelector(".container");
+
+    let category = document.createElement("div");
+    category.classList.add("category");
+        
+    container.appendChild(category);
+    let title = document.createElement("div");
+    title.classList.add("titleCard");
+    category.appendChild(title);
+    container.appendChild(category);
+    title.innerHTML = "Últimos cursos:";
+
+    console.log(coursesSort);
+
+    for(let i = 0; i < 15; i++){
+        // Crear un custom-card
+        let customCard = document.createElement("custom-card");
+        customCard.setAttribute("title", coursesSort[i].title);
+        customCard.setAttribute("description",coursesSort[i].description === null ? "" : coursesSort[i].description);
+        customCard.setAttribute("image", coursesSort[i].courseImage);
+        customCard.setAttribute("navigation", urlCourse + coursesSort[i].identifiers.slug);
+        // Añadirlo al contenedor
+        customCarousel.appendChild(customCard);
+    }
+    category.appendChild(customCarousel);
+
+}
+
+function ShowCourses() {
+    console.log(courses);
+    contador = 0;
+
+    for(let i = 0; i < startCourses.length; i++) {
+        foundCourse = courses.find(course => course.id === startCourses[i].course_id);
+        if (foundCourse) {
+            contador+= 1;
+            foundCourse = {...foundCourse, progress_rate: startCourses[i].progress_rate};
+            coursesUser.push(foundCourse);
+        }
+    }
+
+    console.log(coursesUser);
+
+    let customCarousel = document.createElement("custom-carousel");
+    customCarousel.classList.add("custom-carousel");
+
+    let container = document.querySelector(".container");
+
+    let category = document.createElement("div");
+    category.classList.add("category");
+        
+    container.appendChild(category);
+    let title = document.createElement("div");
+    title.classList.add("titleCard");
+    category.appendChild(title);
+    container.appendChild(category);
+    title.innerHTML = "Mis cursos";
+
+
+    console.log(coursesUser.length);
+    if(contador === 0){
+        customCarousel.innerHTML = "<h2>No has empezado ningún curso</h2>";
+    }else {
+        for(let i = 0; i < coursesUser.length; i++){
+            
+            let customCard = document.createElement("custom-card");
+            customCard.setAttribute("title", coursesUser[i].title);
+            customCard.setAttribute("description",coursesUser[i].description === null ? "" : coursesUser[i].description);
+            customCard.setAttribute("image", coursesUser[i].courseImage);
+            customCard.setAttribute("navigation", urlCourse + coursesUser[i].identifiers.slug);
+
+            customCarousel.appendChild(customCard);
+        }
+
+    }
+    category.appendChild(customCarousel);
+    
+}
+
+/*
+function showHelloUser(){
+    let userInfo = document.getElementById("userInfo");
+    // Recoger el contenido de un elemento ID helloUser
+    let userName = document.getElementById('el_1714734182005_487').textContent;
+    let userID = document.getElementById('el_1714734184272_494').textContent;
+
+    userInfo.innerHTML = `
+    <p id="helloUser">Hola ${userName}</p>
+    <custom-user-score user-id="${userID}"></custom-user-score>
+    `;
+}
+*/
+
+function showContainer() {
+    // Create the modal overlay
+    let overlay = document.createElement("div");
+    overlay.classList.add("modal-overlay", "modal-overlay-active");
+    document.body.appendChild(overlay);
+    
+    // Create the search container
+    let searchContainer = document.createElement("div");
+    searchContainer.classList.add("modal", "modal-active");
+    
+    searchContainer.innerHTML = `
+        <div class="containerCourseProgress">
+            <input type="text" class="search-input" placeholder="Buscador de cursos">
+            <button class="reset-search" onclick="resetSearchCourse()">Reset</button>
+            <button class="search-btn" onclick="searchCourse()">Buscar</button>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()"> ⬇️ SELECCIONA UN CURSO ⬇️</div>
+        <ul class="menu"></ul>
+    `;
+    
+    document.body.appendChild(searchContainer);
+    
+    // Add event listener to close modal when clicking outside of it
+    overlay.addEventListener("click", function() {
+        searchContainer.remove();
+        overlay.remove();
+    });
+}
+
+    function resetSearchCourse() {
+        console.log("Reset search course");
+    }
+
+    function searchCourse() {
+        console.log("Search course");
+    }
+
+    function toggleMenu() {
+    deployCoursesActive = !deployCoursesActive;
+    let menu = document.querySelector('.menu');
+    let isActive = menu.classList.contains('active');
+    let menuIcon = document.querySelector('.menu-icon');
+
+    if (deployCoursesActive) {
+        menuIcon.textContent = '⬆️ OCULTAR CURSOS ⬆️';
+    } else {
+        menuIcon.textContent = '⬇️ DESPLEGAR LISTADO CURSOS ⬇️';
+    }
+    // Verifica si la búsqueda está activa y si el menú está actualmente inactivo
+    if (searchActive && !isActive) {
+        searchCourse();  // Si hay una búsqueda activa, actualiza la lista de cursos
+    } else if (!isActive) {
+        populateMenu(coursesUserFilter);  // Si no hay búsqueda activa, muestra todos los cursos
+    } else {
+        menu.classList.remove('active');  // Cierra el menú si está activo
+    }
+}
+
+    function searchCourse() {
+    let searchInput = document.querySelector('.search-input');
+    let isActive = document.querySelector('.menu').classList.contains('active');
+
+    searchActive = searchInput.value !== '';  // Verifica si hay texto en el campo de búsqueda
+
+    if (searchActive) {
+        let searchResults = coursesUserFilter.filter(course =>
+            course.title.toLowerCase().includes(searchInput.value.toLowerCase())
+        );
+        populateMenu(searchResults);  // Puebla el menú solo con los resultados de la búsqueda
+    } else if (isActive) {
+        populateMenu(coursesUserFilter);  // Si no hay búsqueda y el menú está activo, muestra todos los cursos
+    }
+}
+
+function populateMenu(courses) {
+    let menu = document.querySelector('.menu');
+    menu.innerHTML = '';  // Limpia el menú existente
+    courses.forEach(course => {
+        let listItem = document.createElement('li');
+        listItem.textContent = course.title;
+        listItem.id = course.id;
+        listItem.style.cursor = 'pointer';  // Estilo para el cursor
+        listItem.addEventListener('click', () => showCourseInfo(course.id));
+        menu.appendChild(listItem);
+    });
+    menu.classList.add('active');  // Asegura que el menú se marque como activo
+}
+async function showCourseInfo(learningUnitId) {
+    let percentage = await fetchTotalUsers(learningUnitId);
+
+    console.log("Showing course info for learning unit ID:", learningUnitId);
+    let curso;
+    let cursoProgreso;
+
+    // Recoger Progreso del curso seleccionado y curso en concreto.
+    for(let i = 0; i < coursesUserFilter.length; i++){
+        if(coursesUserFilter[i].id === learningUnitId){
+            curso = coursesUserFilter[i];
+            break;
+        }
+    }
+
+    for(let i = 0; i < progressUser.length; i++){
+        if(progressUser[i].course_id === learningUnitId){
+            cursoProgreso = progressUser[i];
+            break;
+        }
+    }
+
+    console.log(curso);
+    console.log(cursoProgreso);
+
+    let modal = document.querySelector('.modal');
+    modal.innerHTML = `
+    <h2>${curso.title}</h2>
+    <p class='modalDescripcion'>${curso.description ? curso.description : 'No disponible'}</p>
+        <div class="contenedorPrincipal">
+            <div class='divProgreso'>   
+                <p class='modalProgreso'>${cursoProgreso.progress_rate}%</p>
+            </div>
+            <div class='divTiempo'>   
+                <p class='modalTiempo'>${cursoProgreso.time_on_course} min</p>
+            </div>
+            <div class='divUnidades'>   
+                <p class='modalUnidades'>${cursoProgreso.completed_units} / ${cursoProgreso.total_units}</p>
+            </div>
+            <div class="divAverage">   
+                <p class='modalAverage'>${cursoProgreso.average_score_rate}%</p>
+            </div>
+        </div>
+    <p class='modalDescripcion'>¡Enhorabuena por acceder al curso, estás en el ${percentage}% del total de usuarios de la plataforma!</p>
+    <button class='modalbutton' onclick="closeModal()">Cerrar</button>
+`;
+
+}
+
+async function fetchTotalUsers(courseID) {
+    let totalUsers;
+    let usersPerCourse;
+
+    try {
+        const totalUsersResponse = await fetch(`${url}/v2/users`, requestOptions);
+        const totalUsersData = await totalUsersResponse.json();
+        totalUsers = totalUsersData.meta.totalItems;
+        console.log(totalUsers);
+
+        const usersPerCourseResponse = await fetch(`${url}/v2/courses/${courseID}/analytics`, requestOptions);
+        const usersPerCourseData = await usersPerCourseResponse.json();
+        usersPerCourse = usersPerCourseData.students;
+        console.log(usersPerCourse);
+
+        // Calcular el porcentaje de usuarios que han accedido al curso y redondear a 2 decimales
+        let percentage = Math.round((usersPerCourse / totalUsers) * 10000) / 100;
+        return percentage;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return 0;
+    }
+}
+
+
+function closeModal() {
+    let modal = document.querySelector('.modal');
+    let overlay = document.querySelector('.modal-overlay');
+    modal.remove();
+    overlay.remove();
+}
+
+
+// Esperar a que el DOM esté listo
+document.addEventListener('DOMContentLoaded', Start);
+
+  </script>
+</body>
+</html>

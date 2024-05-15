@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script type="module" src="./prueba1.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.3.3/customLeaderBoard/styleLeaderBoard.css">
 </head>
-<script type="module" src="../../TurisCool-Web-Components/customLeaderBoard/customLeaderBoard.js"></script>
-<link rel="stylesheet" href="../../TurisCool-Web-Components/customLeaderBoard/styleLeaderBoard.css">
 <body>
-    <body>
-        <custom-leaderboard data='{"actualuser": "65d3763f741db932c906da1c", "tag": "MM-GROWERSGO", "redirect": ""}'></custom-leaderboard>
-    </body>
+
+    <div id="leaderboard-container"></div>
+    <script>
+        function Start() {
+
+let leaderboardContainer = document.getElementById('leaderboard-container');
+
+let info = document.createElement('div');
+
+info.innerHTML = `<custom-leaderboard data='{"actualuser": "660bd2dc64caf10d3d0637ae", "tag": "MM-LOSGIGANTES", "redirect": "leaderboard los gigantes"}'></custom-leaderboard>`;
+leaderboardContainer.appendChild(info);
+        }
+
+        document.addEventListener('DOMContentLoaded', Start);
+    </script>
+</body>
 </html>
