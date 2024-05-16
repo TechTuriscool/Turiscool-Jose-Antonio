@@ -176,7 +176,6 @@ h2 {
 
 .container {
     margin-top: -30px;
-    padding-top: 30px;
     background: linear-gradient( #252525, #006791 );
     width: 100vw;
     display: flex;
@@ -418,20 +417,81 @@ h2 {
 .contenedorPrincipal {
     width: 80%;
     display: flex;
+    margin: auto;
     margin-top: 20px;
 }
 
 .contenedorPrincipal div {
-    width: 25%;
+    width: 100px;    
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin: space-between;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     border: 1px solid #ccc;
 }
 
+.containerProgress, .containerProgress * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;   
+        }
+        .containerProgress {
+            position: relative;
+            display: flex;
+            gap: 30px;
+            margin: auto;
+            
+        }
+        .containerProgress .box {
+            position: relative;
+            padding: 20px 0;
+            width: 150px;
+            background: grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .containerProgress .box .circle {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background: conic-gradient(from 0deg, var(--clr) 0%, var(--clr) 0% var(--i), #333 var(--i), #333 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .containerProgress .box .circle::before{
+            content: '';
+            position: absolute;
+            inset: 10px;
+            background-color: grey;
+            border-radius: 50%;
+        }
+        .containerProgress .box h2 {
+            position: relative;
+            text-align: center;
+            font-size: 2.5em;
+            color: white;
+            font-weight: 300;
+        }
+        .containerProgress .box h3 {
+            color: white;
+            text-transform: uppercase;
+            margin-top: 20px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+
+        }
 
   </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.0/customUserScore/styleUserScore.css">
@@ -480,6 +540,8 @@ let coursesUserFilter = [];
 let progressUser = [];
 let urlCourse = "https://academy.turiscool.com/course/";
 let filtro = ["garden","onboarding","amo","feet","bienvenidos","MBA","precedimientos","revenuepro","sweet"]
+let avgScoreRate = 0;
+let avgTimeOnCourse = 0;
 
 function Start() {
     //userId = document.getElementById('el_1714734184272_494').textContent;
@@ -795,19 +857,38 @@ async function showCourseInfo(learningUnitId) {
     modal.innerHTML = `
     <h2>${curso.title}</h2>
     <p class='modalDescripcion'>${curso.description ? curso.description : 'No disponible'}</p>
+    
         <div class="contenedorPrincipal">
-            <div class='divProgreso'>   
-                <p class='modalProgreso'>${cursoProgreso.progress_rate}%</p>
+                <div class="containerProgress">
+                    <div class="box" style="--i:${cursoProgreso.progress_rate}%;--clr: #05BFAD;">
+                        <div class="circle">
+                            <h2>${cursoProgreso.progress_rate}</h2>
+                        </div>
+                        <h3>Progreso</h3>
+                    </div>
+                </div>
+                <div class="containerProgress">
+                    <div class="box" style="--i:${Math.floor((cursoProgreso.completed_units / cursoProgreso.total_units) * 100)}%;--clr: #05BFAD;">
+                        <div class="circle">
+                            <h2>${Math.floor((cursoProgreso.completed_units / cursoProgreso.total_units) * 100)}</h2>
+                        </div>
+                        <h3>Unidades completadas</h3>
+                    </div>
+                </div>
             </div>
-            <div class='divTiempo'>   
-                <p class='modalTiempo'>${cursoProgreso.time_on_course} min</p>
+            <div class="contenedorPrincipal">
+                <div class='divTiempo'>   
+                    <p class='modalTiempo'>${cursoProgreso.time_on_course}</p>
+                </div>
+                <div class='divNota'>   
+                    <p class='modalNota'>${cursoProgreso.progress_rate}</p>
+                </div>
+                <div class='divUnidades'>   
+                    <p class='modalUnidades'>${cursoProgreso.average_score_rate}</p>
+                </div>
+                <p>media nota ${avgScoreRate} media de tiempo ${avgScoreRate}</p>
             </div>
-            <div class='divUnidades'>   
-                <p class='modalUnidades'>${cursoProgreso.completed_units} / ${cursoProgreso.total_units}</p>
-            </div>
-            <div class="divAverage">   
-                <p class='modalAverage'>${cursoProgreso.average_score_rate}%</p>
-            </div>
+  
         </div>
     <p class='modalDescripcion'>¡Enhorabuena por acceder al curso, estás en el ${percentage}% del total de usuarios de la plataforma!</p>
     <button class='modalbutton' onclick="closeModal()">Cerrar</button>
@@ -815,9 +896,12 @@ async function showCourseInfo(learningUnitId) {
 
 }
 
+
 async function fetchTotalUsers(courseID) {
     let totalUsers;
     let usersPerCourse;
+    avgScoreRate;
+    avgTimeOnCourse;
 
     try {
         const totalUsersResponse = await fetch(`${url}/v2/users`, requestOptions);
@@ -828,6 +912,10 @@ async function fetchTotalUsers(courseID) {
         const usersPerCourseResponse = await fetch(`${url}/v2/courses/${courseID}/analytics`, requestOptions);
         const usersPerCourseData = await usersPerCourseResponse.json();
         usersPerCourse = usersPerCourseData.students;
+        console.log('medianota' + usersPerCourseData.avg_score_rate);
+        console.log('mediatiempo' + usersPerCourseData.avg_time_to_finish);
+        avgScoreRate = usersPerCourseData.average_score_rate;
+        avgTimeOnCourse = usersPerCourseData.avg_time_to_finish;
         console.log(usersPerCourse);
 
         // Calcular el porcentaje de usuarios que han accedido al curso y redondear a 2 decimales
