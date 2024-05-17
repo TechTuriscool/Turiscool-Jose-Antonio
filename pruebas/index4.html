@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-      <script type="module" src="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.0/index.js"></script>
-    <style>
+      <script type="module" src="https://cdn.jsdelivr.net/gh/TechTuriscool/Dashboard-b2c@v1.3/index.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TechTuriscool/Dashboard-b2c@v1.3/customUserScore/styleUserScore.css">
+   <style>
       .custom-carousel {
     width: 95vw;
     display: flex;
@@ -228,42 +229,30 @@ h2 {
 }
 
 
-  custom-user-score .userProgress {
-    width: 300px;
-    height: 70%;
-    background-color: transparent;
+custom-user-score .userProgress {
+    width: 100%;
+    height: 20%;
     border: 0px ;
   }
   
-  custom-user-score .userProgress div{
-    font-size: 13px;
-    padding: 5px;
-  }
 
   custom-user-score .userProgress h2 {
     display: none;
   }
-
-  custom-user-score .userProgress svg {
-    width: 20px;
-    height: 20px;
-    padding: 0%;
-    margin: 0%;
-    margin-bottom: 10px;
-
-  }
-
-  custom-user-score .progress div {
-    padding: 5px;
-    height: 80%;
-    width: 34%;
-    border: 0px;
-    content: "asd";
-  }
       
-  custom-user-score .progress {
-        background-color: transparent;
+  custom-user-score svg {
+    width: 100px;
+    height: 100px;
+   }
 
+   #helloUser{
+    font-size: 28px;
+    font-weight: 500;
+    margin-left: 0px;
+    color: #222;
+    text-shadow: 2px 2px 50px rgba(0,0,0,1);
+    padding: 10px;
+    padding-top: 0px;
    }
 
    
@@ -390,6 +379,10 @@ h2 {
     z-index: 1000;
 }
 
+.modal h1 {
+    color: #222;
+}
+
 .modal-active {
     display: block;
 }
@@ -414,25 +407,7 @@ h2 {
     margin-top: 0px;
 }
 
-.contenedorPrincipal {
-    width: 80%;
-    display: flex;
-    margin: auto;
-    margin-top: 20px;
-}
-
-.contenedorPrincipal div {
-    width: 100px;    
-    display: flex;
-    flex-direction: column;
-    margin: space-between;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-}
-
-.containerProgress, .containerProgress * {
+        .containerProgress, .containerProgress * {      
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -492,14 +467,62 @@ h2 {
             letter-spacing: 0.1em;
 
         }
+.contenedorPrincipal, .contenedorPrincipal2 {
+    width: 100%;
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.contenedorPrincipal div {
+    width: 300px;    
+    display: flex;
+    flex-direction: column;
+    margin: space-between;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+custom-cake{
+    width: 300px;
+    height: 300px;
+}
+
+.piechart-body {
+    width: 300px;
+    height: 300px;
+}
+
+
+.contenedorPrincipal2 custom-bar-graph {
+    width: 950px;
+}
+
+.contenedorPrincipal3 {
+    width: 100%;
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.contenedorPrincipal3 div {
+    width: 300px;  
+    height: 150px;  
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    margin-right: 15px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
 
   </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TechTuriscool/TurisCool-Web-Components@v1.0/customUserScore/styleUserScore.css">
 </head>
 <body>
-    <div id="userInfo">
-        
-    </div>
   <div id="heroImage">
         <img src="https://i.ibb.co/sw91qd1/hammocks-with-palm-trees.jpg">
         <img class="logo" src="https://i.ibb.co/wLCddp4/ASDASDASD-2-Photoroom.png">
@@ -540,14 +563,20 @@ let coursesUserFilter = [];
 let progressUser = [];
 let urlCourse = "https://academy.turiscool.com/course/";
 let filtro = ["garden","onboarding","amo","feet","bienvenidos","MBA","precedimientos","revenuepro","sweet"]
-let avgScoreRate = 0;
-let avgTimeOnCourse = 0;
+let avgScoreRate;
+let avgTimeOnCourse;
+let scoreRateUser;
+let timeOnCourseUser;
+let usuariosFinalizados;
+
+    //if (location.pathname.includes("index.html") || !location.pathname.includes("course.html")) {
+        document.addEventListener('keyup', searchCourse);
+    //}
 
 function Start() {
     //userId = document.getElementById('el_1714734184272_494').textContent;
 
     fetchPages();
-    //showHelloUser();
 }
 
 function fetchPages() {
@@ -727,21 +756,23 @@ function ShowCourses() {
     
 }
 
-/*
+
 function showHelloUser(){
     let userInfo = document.getElementById("userInfo");
     // Recoger el contenido de un elemento ID helloUser
-    let userName = document.getElementById('el_1714734182005_487').textContent;
-    let userID = document.getElementById('el_1714734184272_494').textContent;
+    //let userName = document.getElementById('el_1714734182005_487').textContent;
+    //let userID = document.getElementById('el_1714734184272_494').textContent;
+    let userName = "Jose Antonio";
 
-    userInfo.innerHTML = `
+    return (`
     <p id="helloUser">Hola ${userName}</p>
-    <custom-user-score user-id="${userID}"></custom-user-score>
-    `;
+    <custom-user-score user-id="${userId}"></custom-user-score>
+    `);
 }
-*/
+
 
 function showContainer() {
+    
     // Create the modal overlay
     let overlay = document.createElement("div");
     overlay.classList.add("modal-overlay", "modal-overlay-active");
@@ -751,7 +782,9 @@ function showContainer() {
     let searchContainer = document.createElement("div");
     searchContainer.classList.add("modal", "modal-active");
     
-    searchContainer.innerHTML = `
+    searchContainer.innerHTML = /*html*/`
+                ${showHelloUser()}
+                <h1>Buscador de cursos:</h1>
         <div class="containerCourseProgress">
             <input type="text" class="search-input" placeholder="Buscador de cursos">
             <button class="reset-search" onclick="resetSearchCourse()">Reset</button>
@@ -760,7 +793,8 @@ function showContainer() {
         <div class="menu-icon" onclick="toggleMenu()"> ⬇️ SELECCIONA UN CURSO ⬇️</div>
         <ul class="menu"></ul>
     `;
-    
+    showHelloUser()
+
     document.body.appendChild(searchContainer);
     
     // Add event listener to close modal when clicking outside of it
@@ -818,6 +852,8 @@ function showContainer() {
 function populateMenu(courses) {
     let menu = document.querySelector('.menu');
     menu.innerHTML = '';  // Limpia el menú existente
+    console.log('Cursos que recoge el menú');
+    console.log(courses);
     courses.forEach(course => {
         let listItem = document.createElement('li');
         listItem.textContent = course.title;
@@ -828,6 +864,7 @@ function populateMenu(courses) {
     });
     menu.classList.add('active');  // Asegura que el menú se marque como activo
 }
+
 async function showCourseInfo(learningUnitId) {
     let percentage = await fetchTotalUsers(learningUnitId);
 
@@ -850,11 +887,10 @@ async function showCourseInfo(learningUnitId) {
         }
     }
 
-    console.log(curso);
     console.log(cursoProgreso);
 
     let modal = document.querySelector('.modal');
-    modal.innerHTML = `
+    modal.innerHTML = /*html*/`
     <h2>${curso.title}</h2>
     <p class='modalDescripcion'>${curso.description ? curso.description : 'No disponible'}</p>
     
@@ -868,40 +904,39 @@ async function showCourseInfo(learningUnitId) {
                     </div>
                 </div>
                 <div class="containerProgress">
-                    <div class="box" style="--i:${Math.floor((cursoProgreso.completed_units / cursoProgreso.total_units) * 100)}%;--clr: #05BFAD;">
-                        <div class="circle">
-                            <h2>${Math.floor((cursoProgreso.completed_units / cursoProgreso.total_units) * 100)}</h2>
-                        </div>
-                        <h3>Unidades completadas</h3>
-                    </div>
+                    <custom-cake totalUnits="${cursoProgreso.total_units}" unitsCompleted="${cursoProgreso.completed_units}"></custom-cake>
+
+                </div>
+                <div class="containerProgress">
+                    <div class="containerProgress">
+                    ${percentage} de usuarios han accedido al curso
+                </div>
+                </div>
+            </div>                    
+            </div>
+            <div class="contenedorPrincipal2">
+                    <custom-bar-graph timeSpent="40" averageTimeSpent="60"></custom-bar-graph>
+            </div>
+            <div class="contenedorPrincipal3">
+                <div class="containerProgress">
+                    ${Math.round(avgScoreRate)} puntos de media en el curso
+                </div>
+                <div class="containerProgress">
+                    ${Math.round(avgScoreRate)} puntos de media en el curso
+                </div>
+                <div>
+                    ${cursoProgreso.average_score_rate}/100 puntos de tu curso
                 </div>
             </div>
-            <div class="contenedorPrincipal">
-                <div class='divTiempo'>   
-                    <p class='modalTiempo'>${cursoProgreso.time_on_course}</p>
-                </div>
-                <div class='divNota'>   
-                    <p class='modalNota'>${cursoProgreso.progress_rate}</p>
-                </div>
-                <div class='divUnidades'>   
-                    <p class='modalUnidades'>${cursoProgreso.average_score_rate}</p>
-                </div>
-                <p>media nota ${avgScoreRate} media de tiempo ${avgScoreRate}</p>
-            </div>
-  
-        </div>
-    <p class='modalDescripcion'>¡Enhorabuena por acceder al curso, estás en el ${percentage}% del total de usuarios de la plataforma!</p>
     <button class='modalbutton' onclick="closeModal()">Cerrar</button>
 `;
-
+console.log(usuariosFinalizados, percentage)
 }
 
 
 async function fetchTotalUsers(courseID) {
     let totalUsers;
     let usersPerCourse;
-    avgScoreRate;
-    avgTimeOnCourse;
 
     try {
         const totalUsersResponse = await fetch(`${url}/v2/users`, requestOptions);
@@ -909,18 +944,20 @@ async function fetchTotalUsers(courseID) {
         totalUsers = totalUsersData.meta.totalItems;
         console.log(totalUsers);
 
+        console.log(courseID);
         const usersPerCourseResponse = await fetch(`${url}/v2/courses/${courseID}/analytics`, requestOptions);
         const usersPerCourseData = await usersPerCourseResponse.json();
         usersPerCourse = usersPerCourseData.students;
-        console.log('medianota' + usersPerCourseData.avg_score_rate);
-        console.log('mediatiempo' + usersPerCourseData.avg_time_to_finish);
-        avgScoreRate = usersPerCourseData.average_score_rate;
+        avgScoreRate = usersPerCourseData.avg_score_rate;
         avgTimeOnCourse = usersPerCourseData.avg_time_to_finish;
-        console.log(usersPerCourse);
+        usuariosFinalizados = usersPerCourseData.success_rate;
+        console.log('Usuarios en el curso')
+        console.log(usersPerCourseData);
 
+    
         // Calcular el porcentaje de usuarios que han accedido al curso y redondear a 2 decimales
-        let percentage = Math.round((usersPerCourse / totalUsers) * 10000) / 100;
-        return percentage;
+        //let percentage = Math.round((usersPerCourse / totalUsers) * 10000) / 100;
+        return usersPerCourse;
     } catch (error) {
         console.error('Error fetching data:', error);
         return 0;
