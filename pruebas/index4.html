@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-      <script type="module" src="https://cdn.jsdelivr.net/gh/TechTuriscool/Dashboard-b2c@v1.3/index.js"></script>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TechTuriscool/Dashboard-b2c@v1.3/customUserScore/styleUserScore.css">
+      <script type="module" src="https://cdn.jsdelivr.net/gh/TechTuriscool/Dashboard-b2c@v1.5.8/index.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TechTuriscool/Dashboard-b2c@v1.5.8/customUserScore/styleUserScore.css">
+
    <style>
       .custom-carousel {
     width: 95vw;
@@ -235,6 +236,9 @@ custom-user-score .userProgress {
     border: 0px ;
   }
   
+custom-user-score .userProgress .progress {
+    background-color: #D6D6D6;
+}
 
   custom-user-score .userProgress h2 {
     display: none;
@@ -332,6 +336,10 @@ custom-user-score .userProgress {
         transition: 0.4s;
     }
 
+    .modalbutton {
+        margin-top: 20px;
+    }
+
     .containerCourseProgress button:last-child {
         background-color: #05BFAD;
     }
@@ -365,10 +373,11 @@ custom-user-score .userProgress {
         }
     }
 
-    .modal {
+.modal {
     display: none;
     position: fixed;
     width: 40%;
+    max-height: 80%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -377,6 +386,7 @@ custom-user-score .userProgress {
     border: 1px solid #ccc;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    overflow: auto;
 }
 
 .modal h1 {
@@ -428,7 +438,6 @@ custom-user-score .userProgress {
             position: relative;
             padding: 20px 0;
             width: 150px;
-            background: grey;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -449,33 +458,37 @@ custom-user-score .userProgress {
             content: '';
             position: absolute;
             inset: 10px;
-            background-color: grey;
+            background-color: rgb(214, 214, 214);
             border-radius: 50%;
         }
         .containerProgress .box h2 {
             position: relative;
             text-align: center;
             font-size: 2.5em;
-            color: white;
+            color: rgb(0, 0, 0);
             font-weight: 300;
         }
         .containerProgress .box h3 {
-            color: white;
+            color: rgb(0, 0, 0);
             text-transform: uppercase;
             margin-top: 20px;
             font-weight: 500;
             letter-spacing: 0.1em;
-
+            position: relative;
+            text-align: center;
         }
-.contenedorPrincipal, .contenedorPrincipal2 {
+
+.contenedorPrincipal, .contenedorPrincipal2, .contenedorPrincipal3 {
     width: 100%;
     display: flex;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
-.contenedorPrincipal div {
-    width: 300px;    
+.contenedorPrincipal .containerProgress {
+    min-width: 30%;    
+    min-height: 220px;
+    max-width: 30%;
     display: flex;
     flex-direction: column;
     margin: space-between;
@@ -483,21 +496,73 @@ custom-user-score .userProgress {
     align-items: center;
     border-radius: 10px;
     border: 1px solid #ccc;
+    padding: 0;
+    position: relative;
 }
 
-custom-cake{
-    width: 300px;
-    height: 300px;
+.contenedorPrincipal3 .containerProgress {
+    min-width: 45%;    
+    min-height: 220px;
+    max-width: 45%;
+    display: flex;
+    flex-direction: column;
+    margin: space-between;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 0;
+    position: relative;
+}
+
+.contenedorPrincipal3 .containerProgress svg, .contenedorPrincipal .containerProgress svg {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.contenedorPrincipal .containerProgress , .contenedorPrincipal3 .containerProgress{
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    margin-top: 20px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    position: relative;
+    text-align: center;
+}
+
+custom-cake {
+    padding: 0;
+    margin: 0;
+}
+
+custom-cake .piechart-body {
+    max-width: 220px;
+    max-height: 220px;
+    margin: 0;
+    background-color: transparent;
+    border: 0px;
+}
+
+custom-cake .piechart-body h3 {
+    position: relative;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+custom-cake .piechart-body .piechart {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
 }
 
 .piechart-body {
     width: 300px;
     height: 300px;
-}
-
-
-.contenedorPrincipal2 custom-bar-graph {
-    width: 950px;
 }
 
 .contenedorPrincipal3 {
@@ -507,17 +572,29 @@ custom-cake{
     margin-top: 20px;
 }
 
-.contenedorPrincipal3 div {
-    width: 300px;  
-    height: 150px;  
+.contenedorPrincipal2 {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin: 10px;
+    position: relative;
+    padding: auto;
+}
+
+.contenedorPrincipal2 custom-bar-graph {
+    min-width: 100%;
+    position: relative;
+    margin: auto;
+    padding: 0px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+}
+
+custom-bar-graph .bargraph{
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+
 }
 
   </style>
@@ -892,7 +969,7 @@ async function showCourseInfo(learningUnitId) {
     let modal = document.querySelector('.modal');
     modal.innerHTML = /*html*/`
     <h2>${curso.title}</h2>
-    <p class='modalDescripcion'>${curso.description ? curso.description : 'No disponible'}</p>
+    <p class='modalDescripcion'>${curso.description ? curso.description : ''}</p>
     
         <div class="contenedorPrincipal">
                 <div class="containerProgress">
@@ -908,24 +985,22 @@ async function showCourseInfo(learningUnitId) {
 
                 </div>
                 <div class="containerProgress">
-                    <div class="containerProgress">
-                    ${percentage} de usuarios han accedido al curso
-                </div>
+                    <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#000000;} </style> <g> <path class="st0" d="M463.29,305.295v-84.777h-9.38c-39.71,0-75.128,6.873-104.271,15.713c-3.467-7.023-7.264-14.182-10.956-20.92 c1.59-1.441,3.166-2.919,4.682-4.435c22.331-22.316,36.183-53.253,36.168-87.343c0.016-34.089-13.837-65.026-36.168-87.336 C321.035,13.837,290.089,0,256.007,0c-34.082,0-65.027,13.837-87.343,36.198c-22.331,22.309-36.182,53.246-36.182,87.336 c0,34.09,13.851,65.027,36.182,87.343c1.516,1.516,3.076,3.017,4.682,4.435c-3.706,6.738-7.503,13.897-10.97,20.92 c-29.159-8.84-64.547-15.713-104.257-15.713h-9.38v84.777c-28.318,0.526-39.154,23.877-39.154,52.631 c0,28.754,10.836,52.106,39.154,52.631v67.481l9.035,0.315h0.255c2.836,0.098,28.634,1.208,63.586,5.89 c34.938,4.667,79.044,12.958,118.244,27.193l1.545,0.563h29.22l1.545-0.563c40.445-14.692,86.158-23.044,121.59-27.629 c17.739-2.288,32.896-3.661,43.611-4.456c5.358-0.398,9.604-0.646,12.501-0.811c1.441-0.068,2.536-0.128,3.286-0.15 c0.36-0.023,0.646-0.038,0.811-0.038h0.27l9.049-0.315v-67.481c28.319-0.548,39.124-23.877,39.124-52.631 C502.414,329.172,491.609,305.836,463.29,305.295z M49.746,391.821c-0.315,0-0.646,0-1.006-0.015 c-6.438-0.068-20.395-1.756-20.395-33.879c0-32.131,13.957-33.819,20.395-33.88c0.36-0.022,0.691-0.022,1.006-0.022 c6.498,0,12.576,1.861,17.739,5.043c9.694,5.958,16.147,16.673,16.147,28.859c0,12.186-6.453,22.894-16.147,28.852 C62.322,389.967,56.244,391.821,49.746,391.821z M230.63,286.259v202.262c-38.089-12.126-78.069-19.15-109.974-23.314 c-23.502-3.046-42.576-4.48-53.171-5.125V407.51c20.365-7.293,34.906-26.728,34.906-49.584c0-22.856-14.542-42.299-34.906-49.584 v-68.921c48.863,1.395,90.494,13.536,120.389,25.73c15.893,6.453,28.469,12.914,36.978,17.731c2.192,1.246,4.127,2.371,5.778,3.37 V286.259z M268.884,492.708c-0.495,0.165-1.006,0.353-1.501,0.541h-22.736c-0.495-0.188-0.99-0.376-1.516-0.541V292.396h25.753 V492.708z M256.007,228.682c-28.574,0-54.402-11.353-73.341-29.812c-0.33-0.33-0.66-0.646-1.006-0.975 c-10.28-10.296-18.414-22.669-23.742-36.46c18.459-3.482,35.418-10.445,50.545-19.03c25.498-14.452,45.923-33.459,60.09-48.849 c6.123-6.649,11.061-12.629,14.723-17.296c5.898,7.602,14.797,18.752,24.942,30.315c9.11,10.378,19.21,21.086,29.235,29.978 c4.997,4.458,9.995,8.464,14.947,11.773c1.681,1.103,3.347,2.108,5.013,3.061c-4.878,17.836-14.317,33.774-27.043,46.508 c-0.346,0.33-0.675,0.668-1.021,0.998C310.379,217.352,284.552,228.682,256.007,228.682z M444.545,460.082 c-10.595,0.645-29.67,2.079-53.201,5.125c-31.875,4.142-71.856,11.188-109.944,23.314c0,0,0,0-0.014,0V286.236 c0.014,0,0.014,0,0.014,0c8.164-4.899,23.157-13.168,43.492-21.4c29.834-12.066,71.18-24.042,119.654-25.415v68.921 c-20.365,7.286-34.922,26.728-34.922,49.584c0,22.856,14.557,42.291,34.922,49.584V460.082z M463.29,391.806 c-0.375,0.015-0.705,0.015-1.02,0.015c-6.498,0-12.562-1.831-17.724-5.02c-9.695-5.98-16.178-16.688-16.178-28.874 c0-12.186,6.483-22.901,16.178-28.882c5.162-3.181,11.226-5.02,17.724-5.02c0.315,0,0.646,0,1.02,0.022 c6.453,0.083,20.38,1.794,20.38,33.88C483.669,390.012,469.743,391.723,463.29,391.806z"></path> <circle class="st0" cx="215.383" cy="161.037" r="12.502"></circle> <circle class="st0" cx="296.632" cy="161.037" r="12.502"></circle> </g> </g></svg>
+                    ${percentage} usuarios totales
                 </div>
             </div>                    
             </div>
             <div class="contenedorPrincipal2">
-                    <custom-bar-graph timeSpent="40" averageTimeSpent="60"></custom-bar-graph>
+                    <custom-bar-graph timeSpent=${cursoProgreso.time_on_course} averageTimeSpent=${avgTimeOnCourse}></custom-bar-graph>
             </div>
             <div class="contenedorPrincipal3">
                 <div class="containerProgress">
-                    ${Math.round(avgScoreRate)} puntos de media en el curso
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 14V17M12 14C9.58104 14 7.56329 12.2822 7.10002 10M12 14C14.419 14 16.4367 12.2822 16.9 10M17 5H19.75C19.9823 5 20.0985 5 20.1951 5.01921C20.5918 5.09812 20.9019 5.40822 20.9808 5.80491C21 5.90151 21 6.01767 21 6.25C21 6.94698 21 7.29547 20.9424 7.58527C20.7056 8.77534 19.7753 9.70564 18.5853 9.94236C18.2955 10 17.947 10 17.25 10H17H16.9M7 5H4.25C4.01767 5 3.90151 5 3.80491 5.01921C3.40822 5.09812 3.09812 5.40822 3.01921 5.80491C3 5.90151 3 6.01767 3 6.25C3 6.94698 3 7.29547 3.05764 7.58527C3.29436 8.77534 4.22466 9.70564 5.41473 9.94236C5.70453 10 6.05302 10 6.75 10H7H7.10002M12 17C12.93 17 13.395 17 13.7765 17.1022C14.8117 17.3796 15.6204 18.1883 15.8978 19.2235C16 19.605 16 20.07 16 21H8C8 20.07 8 19.605 8.10222 19.2235C8.37962 18.1883 9.18827 17.3796 10.2235 17.1022C10.605 17 11.07 17 12 17ZM7.10002 10C7.03443 9.67689 7 9.34247 7 9V4.57143C7 4.03831 7 3.77176 7.09903 3.56612C7.19732 3.36201 7.36201 3.19732 7.56612 3.09903C7.77176 3 8.03831 3 8.57143 3H15.4286C15.9617 3 16.2282 3 16.4339 3.09903C16.638 3.19732 16.8027 3.36201 16.901 3.56612C17 3.77176 17 4.03831 17 4.57143V9C17 9.34247 16.9656 9.67689 16.9 10" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    ${Math.round(avgScoreRate)} puntos de media
                 </div>
                 <div class="containerProgress">
-                    ${Math.round(avgScoreRate)} puntos de media en el curso
-                </div>
-                <div>
-                    ${cursoProgreso.average_score_rate}/100 puntos de tu curso
+                    <svg fill="#000000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4,8.39l2,2.09L8.39,7.76l2.69,2.75,4.7-5.89L14.22,3.38l-3.3,4.11L8.29,4.81,6,7.52l-1.91-2L.29,9.29l1.42,1.42ZM0,12.3v1.4H16V12.3Z"></path> </g></svg>
+                    ${cursoProgreso.average_score_rate}/100 puntos
                 </div>
             </div>
     <button class='modalbutton' onclick="closeModal()">Cerrar</button>
