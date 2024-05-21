@@ -57,6 +57,7 @@ body {
     width: 100vw;
     margin: 0;
     padding: 0;
+    overflow-x: none;
 }
 
 h1 {
@@ -359,20 +360,6 @@ custom-user-score .userProgress .progress {
     height: 100px;
 }
 
-   /* Responsive */
-   @media screen and (max-width: 1070px) {
-    custom-user-score .userProgress div {
-      font-size: 9px;
-    }   
-   }
-
-   @media screen and (max-width: 700px) {
-    custom-user-score .progress {
-            flex-direction: row;
-            width: 100%;
-        }
-    }
-
 .modal {
     display: none;
     position: fixed;
@@ -417,66 +404,66 @@ custom-user-score .userProgress .progress {
     margin-top: 0px;
 }
 
-        .containerProgress, .containerProgress * {      
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;   
-        }
-        .containerProgress {
-            position: relative;
-            display: flex;
-            gap: 30px;
-            margin: auto;
-            
-        }
-        .containerProgress .box {
-            position: relative;
-            padding: 20px 0;
-            width: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .containerProgress .box .circle {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            background: conic-gradient(from 0deg, var(--clr) 0%, var(--clr) 0% var(--i), #333 var(--i), #333 100%);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.containerProgress, .containerProgress * {      
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+.containerProgress {
+    position: relative;
+    display: flex;
+    gap: 30px;
+    margin: auto;
+    
+}
+.containerProgress .box {
+    position: relative;
+    padding: 20px 0;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.containerProgress .box .circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: conic-gradient(from 0deg, var(--clr) 0%, var(--clr) 0% var(--i), #d3d3d3 var(--i), #d3d3d3 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .containerProgress .box .circle::before{
-            content: '';
-            position: absolute;
-            inset: 10px;
-            background-color: rgb(214, 214, 214);
-            border-radius: 50%;
-        }
-        .containerProgress .box h2 {
-            position: relative;
-            text-align: center;
-            font-size: 2.5em;
-            color: rgb(0, 0, 0);
-            font-weight: 300;
-        }
-        .containerProgress .box h3 {
-            color: rgb(0, 0, 0);
-            text-transform: uppercase;
-            margin-top: 20px;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            position: relative;
-            text-align: center;
-        }
+.containerProgress .box .circle::before{
+    content: '';
+    position: absolute;
+    inset: 10px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+}
+.containerProgress .box h2 {
+    position: relative;
+    text-align: center;
+    font-size: 2.5em;
+    color: rgb(66, 66, 66);
+    font-weight: 300;
+}
+.containerProgress .box h3 {
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    margin-top: 20px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    position: relative;
+    text-align: center;
+}
 
 .contenedorPrincipal, .contenedorPrincipal2, .contenedorPrincipal3 {
     width: 100%;
@@ -491,7 +478,7 @@ custom-user-score .userProgress .progress {
     max-width: 30%;
     display: flex;
     flex-direction: column;
-    margin: space-between;
+    margin: space-evenly;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
@@ -506,7 +493,7 @@ custom-user-score .userProgress .progress {
     max-width: 45%;
     display: flex;
     flex-direction: column;
-    margin: space-between;
+    margin: space-evenly;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
@@ -575,9 +562,7 @@ custom-cake .piechart-body .piechart {
 .contenedorPrincipal2 {
     width: 100%;
     display: flex;
-    margin: 10px;
     position: relative;
-    padding: auto;
 }
 
 .contenedorPrincipal2 custom-bar-graph {
@@ -595,6 +580,66 @@ custom-bar-graph .bargraph{
     height: 100%;
     background-color: #FFFFFF;
 
+}
+
+.totalTime, .totalUnitsCompleted, .average {
+    background-color: #d9d9d9;
+}
+
+/*
+.modal svg {
+    fill: #05BFAD;
+}
+*/
+
+@media (max-width: 1700px) {
+    .modal {
+        width: 60%;
+        margin: auto;
+    }
+    
+}
+
+@media (max-width: 1100px) {
+    .modal {
+        width: 90%;
+    }
+    
+}
+
+@media (max-width: 700px) {
+    .contenedorPrincipal, .contenedorPrincipal3, .progress {
+        flex-wrap: wrap;
+    }
+
+    .contenedorPrincipal .containerProgress, .contenedorPrincipal3 .containerProgress, .contenedorPrincipal2 custom-bar-graph {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .progress div {
+        width: 100%;
+        min-width: 100%;
+        max-width: 80%;
+        font-size: 18px;
+    }
+
+    .containerCourseProgress {
+        flex-wrap: wrap;
+    }
+
+    .containerCourseProgress input {
+        width: 80%;
+        min-width: 80%;
+    
+    }
+
+    .containerCourseProgress button {
+        width: 40%;
+        min-width: 40%;
+        max-width: 40%;
+    }
 }
 
   </style>
