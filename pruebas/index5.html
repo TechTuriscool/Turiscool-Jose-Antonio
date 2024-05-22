@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <script type="module" src="https://cdn.jsdelivr.net/gh/TechTuriscool/Dashboard-b2c@v1.5.8/index.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TechTuriscool/Dashboard-b2c@v1.5.8/customUserScore/styleUserScore.css">
+
+   <style>
+      .custom-carousel {
+    width: 95vw;
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    padding: 10px;
+    margin-bottom: 100px;
+    background-color: white;
+    border: solid 2px #05BFAD;
+    height: 600px;
+}
+
+.custom-carousel img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.custom-carousel img:hover {
+    transform: scale(1.1);
+}
+
+::-webkit-scrollbar {
+    cursor: pointer;
+}
+
+.custom-carousel::-webkit-scrollbar {
+    height: 40px;
+
+}
+
+.custom-carousel::-webkit-scrollbar-thumb {
+    background: #05BFAD;
+    background-clip: content-box;
+    border-radius: 30px;
+    border: solid 15px transparent;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: system-ui,  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow-x: none;
+}
+
+h1 {
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.image-card {
+    border-radius: 10px;
+}
+
+.card {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 300px;
+    height: 520px;
+    border: 10px solid #F3F8FF;
+    margin: 20px;
+    margin-left: 0px;
+    margin-right: 5px;
+    background-color: #F3F8FF;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+    transition: 0.4s;
+
+
+}
+
+.card:hover {
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+.card button {
+    padding: 12px 16px;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #05BFAD;
+    border-radius: 5px;
+    color: #F3F8FF;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.4s;
+    position: absolute;
+    bottom: 0;
+}
+
+.card button:hover {
+    background-color: #006791;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.card h2 {
+
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card p {
+    height: 150px ;
+    width: 90%;
+    margin: 10px;
+    margin-left: 5%;
+    text-align: left;
+    text-wrap: pretty;
+    overflow: hidden;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    transition: 0.4s;
+}
+
+h2 {
+    color: #131313;
+    margin-bottom: 50px;
+}
+
+#heroImage {
+    width: 100%;
+    height: 350px;
+    position: relative;
+  	margin-top: -120px;
+}
+
+#heroImage img:first-child{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+#heroImage::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top, #252525, transparent);
+}
+
+.container {
+    margin-top: -30px;
+    background: linear-gradient( #252525, #006791 );
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+            
+.titleCard {
+    font-size: 32px;
+    color: white;
+    font-weight: bold;
+    margin: 50px;
+}
+      
+.logo{
+    z-index: 102;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    border-radius: 20px;
+   	width: 20%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+  }
+
+  #userInfo {
+      position: absolute;
+      left: 15vw;
+      top: 100px;
+      z-index: 100;
+      background-color: #ffffff9b;
+        border-radius: 20px;
+  }
+      
+#userInfo p {
+    font-size: 20px;
+    z-index: 101;
+    margin-left: 15px;
+    color: black;
+    font-weight: 500;
+     text-shadow: 2px 2px 50px rgba(0,0,0,1);
+  padding: 10px;
+  padding-top: 15px;
+
+}
+
+
+custom-user-score .userProgress {
+    width: 100%;
+    height: 20%;
+    border: 0px ;
+  }
+  
+custom-user-score .userProgress .progress {
+    background-color: #D6D6D6;
+}
+
+  custom-user-score .userProgress h2 {
+    display: none;
+  }
+      
+  custom-user-score svg {
+    width: 100px;
+    height: 100px;
+   }
+
+   #helloUser{
+    font-size: 28px;
+    font-weight: 500;
+    margin-left: 0px;
+    color: #222;
+    text-shadow: 2px 2px 50px rgba(0,0,0,1);
+    padding: 10px;
+    padding-top: 0px;
+   }
+
+   
+    .navbar {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 70%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px;
+        border-radius: 10px;
+    }
+
+    .menu-icon {
+        padding: 20px;
+        display: block;
+        cursor: pointer;
+    }
+
+    .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        max-height: 500px;
+        width: 100%;
+        overflow-y: auto;
+
+    }
+
+    .menu li {
+        padding: 10px 10px;
+        width: 90%;
+        text-align: left;
+        border-bottom: 1px solid #f4f4f4;
+
+    }
+
+    .menu li:hover {
+        background-color: #05BFAD;
+        color: white
+    }
+
+
+
+    .menu.active {
+        display: flex;
+    }
+
+    .search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .containerCourseProgress input[type="text"] {
+        padding: 10px;
+        width: 70%;
+        border: 1px solid #006791;
+        border-radius: 10px;
+    }
+
+    .containerCourseProgress button, .modalbutton {
+        background-color: #006791;
+        color: #ffffff;
+        border: none;
+        padding: 10px 30px;
+        cursor: pointer;
+        margin-left: 10px;
+        border-radius: 10px;
+        transition: 0.4s;
+    }
+
+    .modalbutton {
+        margin-top: 20px;
+    }
+
+    .containerCourseProgress button:last-child {
+        background-color: #05BFAD;
+    }
+
+    .containerCourseProgress button:last-child:hover {
+        background-color: white;
+        border: solid 1px #05BFAD;
+        color:  #05BFAD;
+        transition: 0.4s;
+    }
+
+.containerCourseProgress{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    width: 40%;
+    max-height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F0F1F5;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow: auto;
+}
+
+.modal h1 {
+    color: #222;
+}
+
+.modal-active {
+    display: block;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.modal-overlay-active {
+    display: block;
+}
+
+.modalDescripcion {
+    font-size: 16px;
+    margin-top: 0px;
+}
+
+.containerProgress, .containerProgress * {      
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+.containerProgress {
+    position: relative;
+    display: flex;
+    gap: 30px;
+    margin: auto;
+    
+}
+.containerProgress .box {
+    position: relative;
+    padding: 20px 0;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.containerProgress .box .circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: conic-gradient(from 0deg, var(--clr) 0%, var(--clr) 0% var(--i), #d3d3d3 var(--i), #d3d3d3 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerProgress .box .circle::before{
+    content: '';
+    position: absolute;
+    inset: 10px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+}
+.containerProgress .box h2 {
+    position: relative;
+    text-align: center;
+    font-size: 2.5em;
+    color: rgb(66, 66, 66);
+    font-weight: 300;
+}
+.containerProgress .box h3 {
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    margin-top: 20px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    position: relative;
+    text-align: center;
+}
+
+.contenedorPrincipal, .contenedorPrincipal2, .contenedorPrincipal3 {
+    width: 100%;
+    display: flex;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.contenedorPrincipal .containerProgress {
+    min-width: 30%;    
+    min-height: 220px;
+    max-width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: space-evenly;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+    background-color: #FFFFFF;
+    padding: 0;
+    position: relative;
+}
+
+.contenedorPrincipal3 .containerProgress {
+    min-width: 45%;    
+    min-height: 220px;
+    max-width: 45%;
+    display: flex;
+    flex-direction: column;
+    margin: space-evenly;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+    background-color: #FFFFFF;
+    padding: 0;
+    position: relative;
+}
+
+.contenedorPrincipal3 .containerProgress svg, .contenedorPrincipal .containerProgress svg {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.contenedorPrincipal .containerProgress , .contenedorPrincipal3 .containerProgress, .contenedorPrincipal2 custom-bar-graph .bargraph{
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    margin-top: 20px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    position: relative;
+    text-align: center;
+    border: 1px solid #ffffff;
+    background-color: #FFFFFF;
+    transition: 0.3s;
+}
+
+.contenedorPrincipal .containerProgress:hover , .contenedorPrincipal2 custom-bar-graph .bargraph:hover ,.contenedorPrincipal3 .containerProgress:hover  {
+    scale: 1.03;
+    box-shadow: 0 5px 5px #00000015;
+}
+
+custom-cake {
+    padding: 0;
+    margin: 0;
+}
+
+custom-cake .piechart-body {
+    max-width: 220px;
+    max-height: 220px;
+    margin: 0;
+    background-color: transparent;
+    border: 0px;
+}
+
+custom-cake .piechart-body h3 {
+    position: relative;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+custom-cake .piechart-body .piechart {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+}
+
+.piechart-body {
+    width: 300px;
+    height: 300px;
+}
+
+.contenedorPrincipal3 {
+    width: 100%;
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.contenedorPrincipal2 {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.contenedorPrincipal2 custom-bar-graph {
+    min-width: 100%;
+    position: relative;
+    margin: auto;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+custom-bar-graph .bargraph{
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+
+}
+
+.totalTime, .totalUnitsCompleted, .average {
+    background-color: #d9d9d9;
+}
+
+/*
+.modal svg {
+    fill: #05BFAD;
+}
+*/
+
+@media (max-width: 1700px) {
+    .modal {
+        width: 60%;
+        margin: auto;
+    }
+    
+}
+
+@media (max-width: 1100px) {
+    .modal {
+        width: 90%;
+    }
+    
+}
+
+@media (max-width: 700px) {
+    .contenedorPrincipal, .contenedorPrincipal3, .progress {
+        flex-wrap: wrap;
+    }
+
+    .contenedorPrincipal .containerProgress, .contenedorPrincipal3 .containerProgress, .contenedorPrincipal2 custom-bar-graph {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .progress div {
+        width: 100%;
+        min-width: 100%;
+        max-width: 80%;
+        font-size: 18px;
+    }
+
+    .containerCourseProgress {
+        flex-wrap: wrap;
+    }
+
+    .containerCourseProgress input {
+        width: 80%;
+        min-width: 80%;
+    
+    }
+
+    .containerCourseProgress button {
+        width: 40%;
+        min-width: 40%;
+        max-width: 40%;
+    }
+}
+
+  </style>
+</head>
+<body>
+  <div id="heroImage">
+        <img src="https://i.ibb.co/sw91qd1/hammocks-with-palm-trees.jpg">
+        <img class="logo" src="https://i.ibb.co/wLCddp4/ASDASDASD-2-Photoroom.png">
+    </div>
+    <div id="difuminado"></div>
+    <div class="containerCourseProgress">
+        <button class="search-btn" onclick="showContainer()">Mi progreso</button>
+    </div>
+    <div class="container">
+    </div>
+    <script>
+  const url = "https://academy.turiscool.com/admin/api/"
+    const token = "Bearer 17xa7adwlycG4qrbRatBdCHW41xtl9jNyaBq4d45";
+    const lwId = "62b182eea31d8d9863079f42";
+    let userId = "65d3763f741db932c906da1c";
+
+
+const requestOptions = {
+   method: "GET",
+   headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+      "Lw-Client": lwId,
+   },
+};
+
+let pages = 0;
+let deployCoursesActive = false;
+let searchActive = false;
+let pagesUser = 0;
+let totalUsers = 0;
+let usersPerCourse = 0;
+let courses = [];
+let coursesSort = [];
+let startCourses = [];
+let coursesUser = [];
+let coursesUserFilter = [];
+let progressUser = [];
+let urlCourse = "https://academy.turiscool.com/course/";
+let filtro = ["garden","onboarding","amo","feet","bienvenidos","MBA","precedimientos","revenuepro","sweet"]
+let avgScoreRate;
+let avgTimeOnCourse;
+let scoreRateUser;
+let timeOnCourseUser;
+let usuariosFinalizados;
+
+    //if (location.pathname.includes("index.html") || !location.pathname.includes("course.html")) {
+        document.addEventListener('keyup', searchCourse);
+    //}
+
+function Start() {
+    //userId = document.getElementById('el_1714734184272_494').textContent;
+
+    fetchPages();
+}
+
+function fetchPages() {
+    fetch(`${url}/v2/courses`, requestOptions)
+    .then(response => response.json())
+    .then(metaData => {
+        pages = metaData.meta.totalPages;
+        fetchCourses();
+    });
+}
+
+
+function fetchCourses() {
+    let fetchPromises = [];
+    for (let i = 1; i <= pages; i++) {
+        fetchPromises.push(
+            fetch(`${url}/v2/courses?page=${i}`, requestOptions)
+            .then(response => response.json())
+            .then(coursesData => {
+                // Añadir los cursos que no estén ya en el array
+                for (let j = 0; j < coursesData.data.length; j++) {
+                    if (!courses.find(course => course.id.toLowerCase() === coursesData.data[j].id.toLowerCase()) && !coursesData.data[j].id.startsWith("formac") &&  !filtro.some(item => coursesData.data[j].id.toLowerCase().includes(item.toLowerCase()))) {  
+                        courses.push(coursesData.data[j]);
+                    }
+                }
+            })
+        );
+    }
+
+    Promise.all(fetchPromises)
+    .then(() => {
+        fetchPagesUser();
+        OrderByDate();
+    });
+}
+
+function fetchPagesUser() {
+    fetch(`${url}/v2/users/${userId}/progress`, requestOptions)
+    .then(response => response.json())
+    .then(metaData => {
+        pagesUser = metaData.meta.totalPages;
+        
+        fetchProgress();
+    });
+}
+
+function fetchProgress(){
+    let fetchPromises = [];
+
+    for (let i = 0; i < pages; i++) {
+        fetchPromises.push(
+            fetch(`${url}/v2/users/${userId}/progress?page=${i}`, requestOptions)
+            .then(response => response.json())
+            .then(progressData => {
+                for (let j = 0; j < progressData.data.length; j++) {
+                    if (!startCourses.find(course => course.course_id === progressData.data[j].course_id) && progressData.data[j].progress_rate > 0 && progressData.data[j].progress_rate < 100 ) {  
+                        startCourses.push(progressData.data[j]);
+                    } else if(!progressUser.find(course => course.course_id === progressData.data[j].course_id)) {
+                        progressUser.push(progressData.data[j]);
+                    }
+                }
+            })
+        );
+    }
+    Promise.all(fetchPromises)
+    .then(() => {
+        console.log(startCourses);
+        coursesFilter();
+        ShowCourses(); 
+        ShowNewCourses();
+    });
+
+}
+
+function coursesFilter(){
+    for(let i = 0; i < progressUser.length; i++) {
+        foundCourse = courses.find(course => course.id === progressUser[i].course_id);
+        if (foundCourse) {
+            foundCourse = {...foundCourse, progress_rate: progressUser[i].progress_rate};
+            coursesUserFilter.push(foundCourse);
+        }
+    }
+
+    console.log('Soy todos los cursos del usuario');
+    console.log(coursesUserFilter);
+}
+
+function OrderByDate() {
+    coursesSort = [...courses];
+
+    coursesSort.sort((a, b) => {
+        return new Date(b.created) - new Date(a.created);
+    });
+
+}
+
+function ShowNewCourses(){
+    let customCarousel = document.createElement("custom-carousel");
+    customCarousel.classList.add("custom-carousel");
+
+    let container = document.querySelector(".container");
+
+    let category = document.createElement("div");
+    category.classList.add("category");
+        
+    container.appendChild(category);
+    let title = document.createElement("div");
+    title.classList.add("titleCard");
+    category.appendChild(title);
+    container.appendChild(category);
+    title.innerHTML = "Últimos cursos:";
+
+    console.log(coursesSort);
+
+    for(let i = 0; i < 15; i++){
+        // Crear un custom-card
+        let customCard = document.createElement("custom-card");
+        customCard.setAttribute("title", coursesSort[i].title);
+        customCard.setAttribute("description",coursesSort[i].description === null ? "" : coursesSort[i].description);
+        customCard.setAttribute("image", coursesSort[i].courseImage);
+        customCard.setAttribute("navigation", urlCourse + coursesSort[i].identifiers.slug);
+        // Añadirlo al contenedor
+        customCarousel.appendChild(customCard);
+    }
+    category.appendChild(customCarousel);
+
+}
+
+function ShowCourses() {
+    console.log(courses);
+    contador = 0;
+
+    for(let i = 0; i < startCourses.length; i++) {
+        foundCourse = courses.find(course => course.id === startCourses[i].course_id);
+        if (foundCourse) {
+            contador+= 1;
+            foundCourse = {...foundCourse, progress_rate: startCourses[i].progress_rate};
+            coursesUser.push(foundCourse);
+        }
+    }
+
+    console.log(coursesUser);
+
+    let customCarousel = document.createElement("custom-carousel");
+    customCarousel.classList.add("custom-carousel");
+
+    let container = document.querySelector(".container");
+
+    let category = document.createElement("div");
+    category.classList.add("category");
+        
+    container.appendChild(category);
+    let title = document.createElement("div");
+    title.classList.add("titleCard");
+    category.appendChild(title);
+    container.appendChild(category);
+    title.innerHTML = "Mis cursos";
+
+
+    console.log(coursesUser.length);
+    if(contador === 0){
+        customCarousel.innerHTML = "<h2>No has empezado ningún curso</h2>";
+    }else {
+        for(let i = 0; i < coursesUser.length; i++){
+            
+            let customCard = document.createElement("custom-card");
+            customCard.setAttribute("title", coursesUser[i].title);
+            customCard.setAttribute("description",coursesUser[i].description === null ? "" : coursesUser[i].description);
+            customCard.setAttribute("image", coursesUser[i].courseImage);
+            customCard.setAttribute("navigation", urlCourse + coursesUser[i].identifiers.slug);
+
+            customCarousel.appendChild(customCard);
+        }
+
+    }
+    category.appendChild(customCarousel);
+    
+}
+
+
+function showHelloUser(){
+    let userInfo = document.getElementById("userInfo");
+    // Recoger el contenido de un elemento ID helloUser
+    //let userName = document.getElementById('el_1714734182005_487').textContent;
+    //let userID = document.getElementById('el_1714734184272_494').textContent;
+    let userName = "Jose Antonio";
+
+    return (`
+    <p id="helloUser">Hola ${userName}</p>
+    <custom-user-score user-id="${userId}"></custom-user-score>
+    `);
+}
+
+
+function showContainer() {
+    
+    // Create the modal overlay
+    let overlay = document.createElement("div");
+    overlay.classList.add("modal-overlay", "modal-overlay-active");
+    document.body.appendChild(overlay);
+    
+    // Create the search container
+    let searchContainer = document.createElement("div");
+    searchContainer.classList.add("modal", "modal-active");
+    
+    searchContainer.innerHTML = /*html*/`
+                ${showHelloUser()}
+                <h1>Buscador de cursos:</h1>
+        <div class="containerCourseProgress">
+            <input type="text" class="search-input" placeholder="Buscador de cursos">
+            <button class="reset-search" onclick="resetSearchCourse()">Reset</button>
+            <button class="search-btn" onclick="searchCourse()">Buscar</button>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()"> ⬇️ SELECCIONA UN CURSO ⬇️</div>
+        <ul class="menu"></ul>
+    `;
+    showHelloUser()
+
+    document.body.appendChild(searchContainer);
+    
+    // Add event listener to close modal when clicking outside of it
+    overlay.addEventListener("click", function() {
+        searchContainer.remove();
+        overlay.remove();
+    });
+}
+
+    function resetSearchCourse() {
+        console.log("Reset search course");
+    }
+
+    function searchCourse() {
+        console.log("Search course");
+    }
+
+    function toggleMenu() {
+    deployCoursesActive = !deployCoursesActive;
+    let menu = document.querySelector('.menu');
+    let isActive = menu.classList.contains('active');
+    let menuIcon = document.querySelector('.menu-icon');
+
+    if (deployCoursesActive) {
+        menuIcon.textContent = '⬆️ OCULTAR CURSOS ⬆️';
+    } else {
+        menuIcon.textContent = '⬇️ DESPLEGAR LISTADO CURSOS ⬇️';
+    }
+    // Verifica si la búsqueda está activa y si el menú está actualmente inactivo
+    if (searchActive && !isActive) {
+        searchCourse();  // Si hay una búsqueda activa, actualiza la lista de cursos
+    } else if (!isActive) {
+        populateMenu(coursesUserFilter);  // Si no hay búsqueda activa, muestra todos los cursos
+    } else {
+        menu.classList.remove('active');  // Cierra el menú si está activo
+    }
+}
+
+    function searchCourse() {
+    let searchInput = document.querySelector('.search-input');
+    let isActive = document.querySelector('.menu').classList.contains('active');
+
+    searchActive = searchInput.value !== '';  // Verifica si hay texto en el campo de búsqueda
+
+    if (searchActive) {
+        let searchResults = coursesUserFilter.filter(course =>
+            course.title.toLowerCase().includes(searchInput.value.toLowerCase())
+        );
+        populateMenu(searchResults);  // Puebla el menú solo con los resultados de la búsqueda
+    } else if (isActive) {
+        populateMenu(coursesUserFilter);  // Si no hay búsqueda y el menú está activo, muestra todos los cursos
+    }
+}
+
+function populateMenu(courses) {
+    let menu = document.querySelector('.menu');
+    menu.innerHTML = '';  // Limpia el menú existente
+    console.log('Cursos que recoge el menú');
+    console.log(courses);
+    courses.forEach(course => {
+        let listItem = document.createElement('li');
+        listItem.textContent = course.title;
+        listItem.id = course.id;
+        listItem.style.cursor = 'pointer';  // Estilo para el cursor
+        listItem.addEventListener('click', () => showCourseInfo(course.id));
+        menu.appendChild(listItem);
+    });
+    menu.classList.add('active');  // Asegura que el menú se marque como activo
+}
+
+async function showCourseInfo(learningUnitId) {
+    let percentage = await fetchTotalUsers(learningUnitId);
+
+    console.log("Showing course info for learning unit ID:", learningUnitId);
+    let curso;
+    let cursoProgreso;
+
+    // Recoger Progreso del curso seleccionado y curso en concreto.
+    for(let i = 0; i < coursesUserFilter.length; i++){
+        if(coursesUserFilter[i].id === learningUnitId){
+            curso = coursesUserFilter[i];
+            break;
+        }
+    }
+
+    for(let i = 0; i < progressUser.length; i++){
+        if(progressUser[i].course_id === learningUnitId){
+            cursoProgreso = progressUser[i];
+            break;
+        }
+    }
+
+    console.log(cursoProgreso);
+
+    let modal = document.querySelector('.modal');
+    modal.innerHTML = /*html*/`
+    <h2>${curso.title}</h2>
+    <p class='modalDescripcion'>${curso.description ? curso.description : ''}</p>
+    
+        <div class="contenedorPrincipal">
+                <div class="containerProgress">
+                    <div class="box" style="--i:${cursoProgreso.progress_rate}%;--clr: #05BFAD;">
+                        <div class="circle">
+                            <h2>${cursoProgreso.progress_rate}</h2>
+                        </div>
+                        <h3>Progreso</h3>
+                    </div>
+                </div>
+                <div class="containerProgress">
+                    <custom-cake totalUnits="${cursoProgreso.total_units}" unitsCompleted="${cursoProgreso.completed_units}"></custom-cake>
+
+                </div>
+                <div class="containerProgress">
+                    <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#000000;} </style> <g> <path class="st0" d="M463.29,305.295v-84.777h-9.38c-39.71,0-75.128,6.873-104.271,15.713c-3.467-7.023-7.264-14.182-10.956-20.92 c1.59-1.441,3.166-2.919,4.682-4.435c22.331-22.316,36.183-53.253,36.168-87.343c0.016-34.089-13.837-65.026-36.168-87.336 C321.035,13.837,290.089,0,256.007,0c-34.082,0-65.027,13.837-87.343,36.198c-22.331,22.309-36.182,53.246-36.182,87.336 c0,34.09,13.851,65.027,36.182,87.343c1.516,1.516,3.076,3.017,4.682,4.435c-3.706,6.738-7.503,13.897-10.97,20.92 c-29.159-8.84-64.547-15.713-104.257-15.713h-9.38v84.777c-28.318,0.526-39.154,23.877-39.154,52.631 c0,28.754,10.836,52.106,39.154,52.631v67.481l9.035,0.315h0.255c2.836,0.098,28.634,1.208,63.586,5.89 c34.938,4.667,79.044,12.958,118.244,27.193l1.545,0.563h29.22l1.545-0.563c40.445-14.692,86.158-23.044,121.59-27.629 c17.739-2.288,32.896-3.661,43.611-4.456c5.358-0.398,9.604-0.646,12.501-0.811c1.441-0.068,2.536-0.128,3.286-0.15 c0.36-0.023,0.646-0.038,0.811-0.038h0.27l9.049-0.315v-67.481c28.319-0.548,39.124-23.877,39.124-52.631 C502.414,329.172,491.609,305.836,463.29,305.295z M49.746,391.821c-0.315,0-0.646,0-1.006-0.015 c-6.438-0.068-20.395-1.756-20.395-33.879c0-32.131,13.957-33.819,20.395-33.88c0.36-0.022,0.691-0.022,1.006-0.022 c6.498,0,12.576,1.861,17.739,5.043c9.694,5.958,16.147,16.673,16.147,28.859c0,12.186-6.453,22.894-16.147,28.852 C62.322,389.967,56.244,391.821,49.746,391.821z M230.63,286.259v202.262c-38.089-12.126-78.069-19.15-109.974-23.314 c-23.502-3.046-42.576-4.48-53.171-5.125V407.51c20.365-7.293,34.906-26.728,34.906-49.584c0-22.856-14.542-42.299-34.906-49.584 v-68.921c48.863,1.395,90.494,13.536,120.389,25.73c15.893,6.453,28.469,12.914,36.978,17.731c2.192,1.246,4.127,2.371,5.778,3.37 V286.259z M268.884,492.708c-0.495,0.165-1.006,0.353-1.501,0.541h-22.736c-0.495-0.188-0.99-0.376-1.516-0.541V292.396h25.753 V492.708z M256.007,228.682c-28.574,0-54.402-11.353-73.341-29.812c-0.33-0.33-0.66-0.646-1.006-0.975 c-10.28-10.296-18.414-22.669-23.742-36.46c18.459-3.482,35.418-10.445,50.545-19.03c25.498-14.452,45.923-33.459,60.09-48.849 c6.123-6.649,11.061-12.629,14.723-17.296c5.898,7.602,14.797,18.752,24.942,30.315c9.11,10.378,19.21,21.086,29.235,29.978 c4.997,4.458,9.995,8.464,14.947,11.773c1.681,1.103,3.347,2.108,5.013,3.061c-4.878,17.836-14.317,33.774-27.043,46.508 c-0.346,0.33-0.675,0.668-1.021,0.998C310.379,217.352,284.552,228.682,256.007,228.682z M444.545,460.082 c-10.595,0.645-29.67,2.079-53.201,5.125c-31.875,4.142-71.856,11.188-109.944,23.314c0,0,0,0-0.014,0V286.236 c0.014,0,0.014,0,0.014,0c8.164-4.899,23.157-13.168,43.492-21.4c29.834-12.066,71.18-24.042,119.654-25.415v68.921 c-20.365,7.286-34.922,26.728-34.922,49.584c0,22.856,14.557,42.291,34.922,49.584V460.082z M463.29,391.806 c-0.375,0.015-0.705,0.015-1.02,0.015c-6.498,0-12.562-1.831-17.724-5.02c-9.695-5.98-16.178-16.688-16.178-28.874 c0-12.186,6.483-22.901,16.178-28.882c5.162-3.181,11.226-5.02,17.724-5.02c0.315,0,0.646,0,1.02,0.022 c6.453,0.083,20.38,1.794,20.38,33.88C483.669,390.012,469.743,391.723,463.29,391.806z"></path> <circle class="st0" cx="215.383" cy="161.037" r="12.502"></circle> <circle class="st0" cx="296.632" cy="161.037" r="12.502"></circle> </g> </g></svg>
+                    ${percentage} usuarios totales
+                </div>
+            </div>                    
+            </div>
+            <div class="contenedorPrincipal2">
+                    <custom-bar-graph timeSpent=${cursoProgreso.time_on_course} averageTimeSpent=${avgTimeOnCourse}></custom-bar-graph>
+            </div>
+            <div class="contenedorPrincipal3">
+                <div class="containerProgress">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 14V17M12 14C9.58104 14 7.56329 12.2822 7.10002 10M12 14C14.419 14 16.4367 12.2822 16.9 10M17 5H19.75C19.9823 5 20.0985 5 20.1951 5.01921C20.5918 5.09812 20.9019 5.40822 20.9808 5.80491C21 5.90151 21 6.01767 21 6.25C21 6.94698 21 7.29547 20.9424 7.58527C20.7056 8.77534 19.7753 9.70564 18.5853 9.94236C18.2955 10 17.947 10 17.25 10H17H16.9M7 5H4.25C4.01767 5 3.90151 5 3.80491 5.01921C3.40822 5.09812 3.09812 5.40822 3.01921 5.80491C3 5.90151 3 6.01767 3 6.25C3 6.94698 3 7.29547 3.05764 7.58527C3.29436 8.77534 4.22466 9.70564 5.41473 9.94236C5.70453 10 6.05302 10 6.75 10H7H7.10002M12 17C12.93 17 13.395 17 13.7765 17.1022C14.8117 17.3796 15.6204 18.1883 15.8978 19.2235C16 19.605 16 20.07 16 21H8C8 20.07 8 19.605 8.10222 19.2235C8.37962 18.1883 9.18827 17.3796 10.2235 17.1022C10.605 17 11.07 17 12 17ZM7.10002 10C7.03443 9.67689 7 9.34247 7 9V4.57143C7 4.03831 7 3.77176 7.09903 3.56612C7.19732 3.36201 7.36201 3.19732 7.56612 3.09903C7.77176 3 8.03831 3 8.57143 3H15.4286C15.9617 3 16.2282 3 16.4339 3.09903C16.638 3.19732 16.8027 3.36201 16.901 3.56612C17 3.77176 17 4.03831 17 4.57143V9C17 9.34247 16.9656 9.67689 16.9 10" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    ${Math.round(avgScoreRate)} puntos de media
+                </div>
+                <div class="containerProgress">
+                    <svg fill="#000000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4,8.39l2,2.09L8.39,7.76l2.69,2.75,4.7-5.89L14.22,3.38l-3.3,4.11L8.29,4.81,6,7.52l-1.91-2L.29,9.29l1.42,1.42ZM0,12.3v1.4H16V12.3Z"></path> </g></svg>
+                    ${cursoProgreso.average_score_rate}/100 puntos
+                </div>
+            </div>
+    <button class='modalbutton' onclick="closeModal()">Cerrar</button>
+`;
+console.log(usuariosFinalizados, percentage)
+}
+
+
+async function fetchTotalUsers(courseID) {
+    let totalUsers;
+    let usersPerCourse;
+
+    try {
+        const totalUsersResponse = await fetch(`${url}/v2/users`, requestOptions);
+        const totalUsersData = await totalUsersResponse.json();
+        totalUsers = totalUsersData.meta.totalItems;
+        console.log(totalUsers);
+
+        console.log(courseID);
+        const usersPerCourseResponse = await fetch(`${url}/v2/courses/${courseID}/analytics`, requestOptions);
+        const usersPerCourseData = await usersPerCourseResponse.json();
+        usersPerCourse = usersPerCourseData.students;
+        avgScoreRate = usersPerCourseData.avg_score_rate;
+        avgTimeOnCourse = usersPerCourseData.avg_time_to_finish;
+        usuariosFinalizados = usersPerCourseData.success_rate;
+        console.log('Usuarios en el curso')
+        console.log(usersPerCourseData);
+
+    
+        // Calcular el porcentaje de usuarios que han accedido al curso y redondear a 2 decimales
+        //let percentage = Math.round((usersPerCourse / totalUsers) * 10000) / 100;
+        return usersPerCourse;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return 0;
+    }
+}
+
+
+function closeModal() {
+    let modal = document.querySelector('.modal');
+    let overlay = document.querySelector('.modal-overlay');
+    modal.remove();
+    overlay.remove();
+}
+
+
+// Esperar a que el DOM esté listo
+document.addEventListener('DOMContentLoaded', Start);
+
+  </script>
+</body>
+</html>
