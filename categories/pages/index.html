@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satisfaccion</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="./assets/logo.png" alt="logo">
+            <div class="averageScore" id="averageScore"></div>
+        </div>
+        <select id="categoryCards">
+        </select>
+        <div class="search">
+            <input type="text" class="search-input" placeholder="Buscador de cursos">
+            <button class="reset-search" onclick="resetSearchCourse()">Reset</button>
+            <button class="search-btn" onclick="searchCourse()">Buscar</button>
+        </div>
+
+        <div class="menu-icon" onclick="toggleMenu()"> ⬇️ MOSTRAR CURSOS ⬇️</div>
+        <ul class="menu">
+        </ul>
+    </div>
+    </div>
+
+
+    <script src="imports.js"></script>
+</body>
+
+</html>
