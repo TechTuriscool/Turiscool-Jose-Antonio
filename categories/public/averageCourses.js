@@ -83,7 +83,7 @@ async function fetchCourseData() {
                 let hasForbiddenCategory = course.categories.some(category => arrayNamesForbidden.includes(category));
                 if (!hasForbiddenCategory) {
                     courseListCategories.push(course);
-                    console.log(course.categories);
+                    fetchCourseContent(course);
 
                     course.categories.forEach(category => {
                         if (!allCategories.includes(category)) {
@@ -98,13 +98,17 @@ async function fetchCourseData() {
                 }
             });
         }
+        console.log(arrayOfCoursesWithForms);
         console.log(allCategories);
         console.log(courseListCategories);
     } catch (error) {
         console.error('Error:', error);
     }
 }
-async function fetchCourseContent(actualCourseId) {
+
+async function fetchCourseContent(curso) {        
+    let actualCourseId = curso.id;
+    let tituloCurso = curso.title;
     let hasAForm = false;
     try {
         let response = await fetch(`https://academy.turiscool.com/admin/api/v2/courses/${actualCourseId}/contents`, requestOptions);

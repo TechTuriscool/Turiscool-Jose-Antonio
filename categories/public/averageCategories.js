@@ -182,7 +182,7 @@ async function start() {
 async function recoverySurveyInfo() {
     try {
         for (let i = 0; i < surveyIds.length; i++) {
-            let response = await fetch(`https://academy.turiscool.com/admin/api/v2/assessments/${surveyIds[i]}/responses`, requestOptions);
+            let response = await fetch(`https://academy.turiscool.com/admin/api/v2/assessments/66549bcfecbf692ab60b3928/responses`, requestOptions);
             response = await response.json();
             
             let surveys = response.data;

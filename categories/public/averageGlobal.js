@@ -1,244 +1,280 @@
-let token = "Bearer 17xa7adwlycG4qrbRatBdCHW41xtl9jNyaBq4d45";
-let id = "62b182eea31d8d9863079f42";
-let arrayNamesForbidden = ["feet", "bienvenidos", "onboarding", "procedimientos", "taz", "alda"];
+import { clear } from 'console';
+import axios from 'axios';
+import express from 'express';
+import path from 'path';
+import {fileURLToPath} from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+
+const app = express();
+const port = 3000;
+
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+});
+
+//Configuración
+app.use(express.static(__dirname + "/public"));
+app.use(express.json());
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'pages')); 
+
+// Rutas
+
+app.get("/", (req, res) => {
+    res.render('start', { generalAverage });
+});
+
+app.get("/averageCategories", (req,res)=> res.sendFile(__dirname + "/pages/averageCategories.html"));
+app.get("/averageCourses", (req,res)=> res.sendFile(__dirname + "/pages/averageCourses.html"));
+
+const token = "Bearer 17xa7adwlycG4qrbRatBdCHW41xtl9jNyaBq4d45";
+const id = "62b182eea31d8d9863079f42";
 let totalCourses = 0;
-let courseList = [];
-let answersList = [];
+let actualCourseId = 0;
+let courseData = [];
+let courNamesArray = [];
+let courseCategoriesArray = [];
+let courseIdsArray = [];
 let filteredCourseList = [];
 let courseListCategories = [];
 let arrayOfCoursesWithForms = [];
-let surveyIds = [
-    '6630dc6d6352165dab0a521c',
-    '663e42049182a7e0fe02c5ea',
-    '663ce93d82bfd96c2f08b135',
-    '663cdabec7a309fe580e0c4c',
-    '663cccdd8c487bdef10b73d1',
-    '663ca577439d3358b409686d',
-    '663c8d95ee285398f90990b8',
-    '6638c998a8fa16d482065f95',
-    '6644c4cfcfbfe7e0b6069102',
-    '662fd300210f193e120a10f7',
-    '662fc1ccc88c1385cc075104',
-    '661d0a17106e4847670a46c8',
-    '662a74d33983a959b707605e',
-    '662b8b70a11e99b6610bdcd5',
-    '6630dc6d6352165dab0a521c',
-    '662a77a9d5d43be05d0d3080',
-    '662a77fece908041e409852c',
-    '662a7833e7582ab91b0c61c5',
-    '663a5c6632fbf8457c05af44',
-    '663a5b85d524529d42000f44',
-    '663900a6878592544f031ee4',
-    '663a5c8e9099f4f52d03110d',
-    '65bbb01a0bded8ccd901e153',
-    '65cb8ae20c03671c4c0f217c',
-    '65cb8b5525e8dd6426042aa4',
-    '661d035f49005ddb9207ded4',
-    '65ce333ce1b3f84feb08ddfd',
-    '65ce2a0b4de66a5bc2009213',
-    '65ce2c3b1ee372345a09389d',
-    '65ce2c88209a1e698c04dfee',
-    '65ce2d67a786d4aa87094dec',
-    '64bfc5b5fa623555eb0f1ea1',
-    '64b90d8cb34247785a0deaad',
-    '6630dc9eeced332b720c06c3'
-];
-let actualCourseId = "formacion-excel-para-alojamientos-turisticos";
+let surveyIds = [];
+let coursesWithForms = [];
+let generalAverage = 10;
 
-let requestOptions = {
-    method: "GET",
+const axiosInstance = axios.create({
+    baseURL: 'https://academy.turiscool.com/admin/api/v2',
     headers: {
         Authorization: token,
-        "Content-Type": "application/json",
-        "Lw-Client": id,
+        'Content-Type': 'application/json',
+        'Lw-Client': id,
     },
-};
+});
 
 async function fetchCourseMeta() {
     try {
-        let response = await fetch(`https://academy.turiscool.com/admin/api/v2/courses`, requestOptions);
-        response = await response.json();
-        console.log(response);
-        totalCourses = response.meta.totalPages;
+        const response = await axiosInstance.get('/courses');
+        totalCourses = response.data.meta.totalPages;
         await fetchCourseData();
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
+// Filtrar de todos los cursos cuales tienen formularios
+async function filterCoursesWithForms() {
+    for (let i = 0; i < courseData.length; i++) {
+        actualCourseId = courseData[i].id;
+        await fetchCourseContent(actualCourseId, courseData[i]);
+    }
+    console.log("coursesWithForms", coursesWithForms);
+}
+
 async function fetchCourseData() {
     try {
+        const requests = [];
         for (let i = 1; i <= totalCourses; i++) {
-            let response = await fetch(`https://academy.turiscool.com/admin/api/v2/courses?page=${i}`, requestOptions);
-            response = await response.json();
-            let courses = response.data;
-
-            courses.forEach(course => {
-                if (arrayNamesForbidden.includes(course.name)) {
-                    return;
-                }
-                courseList.push(course);
-                courseListCategories.push(course.categories);
-
-
-            });
+            requests.push(axiosInstance.get(`/courses?page=${i}`));
         }
-        await filterForbiddenCourses();
-        getArrayOfIds();
-        getArrayOfCourseNames();
-        getArrayOfCOurseCategories();
+
+        const responses = await Promise.all(requests);
+
+        responses.forEach(response => {
+            const courses = response.data.data;
+            courses.forEach(course => {
+                courseIdsArray.push(course.id);
+                courNamesArray.push(course.title);
+                courseCategoriesArray.push(course.categories);
+                //borrar repetidos de las categorias
+                courseCategoriesArray = courseCategoriesArray.flat();
+                courseCategoriesArray = [...new Set(courseCategoriesArray)];
+
+
+                let courseObj = {
+                    id: course.id,
+                    title: course.title,
+                    categories: [], // Crear un array de categorías específico para este curso
+                    unitIdsWithForms: [] // Crear un array para almacenar las IDs de las unidades con formularios
+                };
+
+                course.categories.forEach(category => {
+                    courseObj.categories.push(category);
+                });
+
+                // Añadir el objeto curso al array principal
+                courseData.push(courseObj);
+            });
+
+            // Crear un array de categorías
+            courses.forEach(course => {
+                course.categories.forEach(category => {
+                    courseListCategories.push(category);
+                });
+            });
+
+            // Eliminar repetidos
+            courseListCategories = courseListCategories.flat();
+            courseListCategories = [...new Set(courseListCategories)];
+        });
+
+        await filterCoursesWithForms();
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-async function fetchCourseContent(actualCourseId) {
+async function fetchCourseContent(actualCourseId, courseObj) {
+    console.log("entra")
     let hasAForm = false;
     try {
-        let response = await fetch(`https://academy.turiscool.com/admin/api/v2/courses/${actualCourseId}/contents`, requestOptions);
-        response = await response.json();
-        
+        const response = await axiosInstance.get(`/courses/${actualCourseId}/contents`);
+
         // Asegúrate de que sections existe y es un array antes de intentar acceder a learningUnits
-        let sections = response.sections;
+        const sections = response.data.sections;
         if (sections && Array.isArray(sections)) {
             // Recorre las secciones para extraer learningUnits
             sections.forEach(section => {
-
                 // Verifica cada unidad de aprendizaje en la sección
                 section.learningUnits.forEach(unit => {
                     if (unit.type === 'newSurvey') {
                         hasAForm = true;
                         surveyIds.push(unit.id);
+                        courseObj.unitIdsWithForms.push(unit.id); // Añadir la ID de la unidad al objeto courseObj
                     }
                 });
             });
         } else {
             console.log('No sections available or sections is not an array.');
         }
-        //pushear a un array los cursos que tienen formularios
+
+        // Pushear al array los cursos que tienen formularios
         if (hasAForm) {
-            arrayOfCoursesWithForms.push(actualCourseId);
+            coursesWithForms.push(courseObj);
         }
-
-
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-async function runAllCoursesAndCheckfIfHasForm() {
-    console.log("running...")
-    for (let i = 0; i < filteredCourseList.length; i++) {
-        if (i % 2 === 0) {
-            console.log("*");
-        } else {
-            console.log("-");
-        }
-        await fetchCourseContent(filteredCourseList[i].id);
-    }
-}
+// Crear una función para crear un objeto con las categorías y las unitIdsWithForms que pertenecen a esa categoría 
+function createObjectWithCategoriesAndUnitIds() {
+    const categoryUnitsMap = {};
 
-function getArrayOfIds() {
-    let arrayIds = [];
-    courseList.forEach(course => {
-        arrayIds.push(course.id);
-    });
-    return arrayIds;
-}
-
-function getArrayOfCourseNames() {
-    let arrayCourseNames = [];
-    courseList.forEach(course => {
-        arrayCourseNames.push(course.title);
-    });
-    return arrayCourseNames;
-}
-
-function getArrayOfCOurseCategories() {
-    let arrayCourseCategories = [];
-    courseListCategories.forEach(course => {
-        arrayCourseCategories.push(course);
-    });
-
-    //filtrar categorias repetidas
-    arrayCourseCategories = arrayCourseCategories.flat();
-    arrayCourseCategories = [...new Set(arrayCourseCategories)];
-    return arrayCourseCategories;
-}
-
-async function filterForbiddenCourses() {
-    filteredCourseList = courseList.filter(course => !arrayNamesForbidden.includes(course.name));
-}
-
-async function start() {
-    console.log("start");
-    await fetchCourseMeta();
-    await fetchCourseContent(actualCourseId);
-    //await runAllCoursesAndCheckfIfHasForm();
-    await recoverySurveyInfo();
-    getIndividualAnswersFromAnswersList();
-}
-
-async function recoverySurveyInfo() {
-    try {
-        for (let i = 0; i < surveyIds.length; i++) {
-            let response = await fetch(`https://academy.turiscool.com/admin/api/v2/assessments/${surveyIds[i]}/responses`, requestOptions);
-            response = await response.json();
-            
-            let surveys = response.data;
-
-            surveys.forEach(survey => {
-                let answers = survey.answers;
-                answersList.push(answers);
-            });
-        }
-    } catch (error) {
-        // Mostrar solo la palabra "error"
-    }
-}
-
-function getIndividualAnswersFromAnswersList() {
-    let individualAnswers = [];
-
-    // Extraer respuestas individuales
-    answersList.forEach(answers => {
-        answers.forEach(answer => {
-            if (answer && typeof answer.answer === 'string') {
-                individualAnswers.push(answer.answer);
+    coursesWithForms.forEach(course => {
+        course.categories.forEach(category => {
+            if (!categoryUnitsMap[category]) {
+                categoryUnitsMap[category] = [];
             }
+            categoryUnitsMap[category] = categoryUnitsMap[category].concat(course.unitIdsWithForms);
         });
     });
 
-    // Eliminar las opciones que sean null
-    individualAnswers = individualAnswers.filter(answer => answer != null);
+    // Eliminar duplicados dentro de cada categoría
+    for (const category in categoryUnitsMap) {
+        categoryUnitsMap[category] = [...new Set(categoryUnitsMap[category])];
+    }
 
-    // Eliminar las que no empiecen por un número
-    individualAnswers = individualAnswers.filter(answer => !isNaN(answer.charAt(0)));
+    return categoryUnitsMap;
+}
 
-    // eliminar todo lo que este despues de cada /
-    individualAnswers = individualAnswers.map(answer => {
-        let index = answer.indexOf('/');
-        return answer.substring(0, index);
-    });
+async function filterCoursesByCategory() {
+    for (let i = 0; i < courseListCategories.length; i++) {
+        let filteredCourses = courseData.filter(course => course.categories.includes(courseListCategories[i]));
+        filteredCourseList.push({ [`${courseListCategories[i]}`]: filteredCourses.map(course => course.unitIdsWithForms).flat() });
 
-    // calcular la media
 
-    let sum = 0;
-    individualAnswers.forEach(answer => {
-        sum += parseInt(answer);
-    });
+    }
+}
 
-    let average = sum / individualAnswers.length;
-    //redondear a 2 decimales
 
-    average = Math.round(average * 100) / 100;
 
-    let averageScoreDiv = document.getElementById('averageScore');
-    averageScoreDiv.style.backgroundColor = "red";
-    averageScoreDiv.innerHTML = average;
+
+async function recoverySurveyInfo() {
+    try {
+        const requests = surveyIds.map(id => axiosInstance.get(`/assessments/${id}/responses`));
+        const responses = await Promise.all(requests);
+
+        responses.forEach(response => {
+            const surveys = response.data.data;
+
+            surveys.forEach(survey => {
+                const answers = survey.answers;
+                answersList.push(answers);
+            });
+        });
+    } catch (error) {
+        // Mostrar solo la palabra "error"
+        console.error('Error:', error);
+    }
+}
+
+//funcion para recorrer filteredCourseList y por cada categoria hacer una llamada a revocerySurveyInfo
+async function recoverySurveyInfoByCategory() {
+    let answersObject = {}; // Create an empty object to store the answers by category
+    console.log("entra")
+    for (let i = 0; i < filteredCourseList.length; i++) {
+        let category = Object.keys(filteredCourseList[i])[0];
+        //recorrer el array de unitIds
+        for (let j = 0; j < filteredCourseList[i][category].length; j++) {
+            let unitId = filteredCourseList[i][category][j];
+            console.log(unitId)
+            try {
+                const response = await axiosInstance.get(`/assessments/${unitId}/responses`);
+                const surveys = response.data.data;
+                surveys.forEach(survey => {
+                    const answers = survey.answers;
+                    answers.forEach(answer => { // Iterate over the answers array
+                        if (!answersObject[category]) {
+                            answersObject[category] = []; // Create an empty array for the category if it doesn't exist
+                        }
+                        answersObject[category].push(answer.answer); // Push only the answer to the corresponding category array
+                    });
+                });
+            } catch (error) {
+                // Handle error
+            }
+        }
+    }
+
+    // Process the answersObject
+    for (let category in answersObject) {
+        let answers = answersObject[category];
+        // Remove null values
+        let answersWithoutNull = answers.filter(el => el !== null);
+        // Split by '/' and get the first value without spaces
+        let answersTrimed = answersWithoutNull.map(el => el.split('/')[0].trim());
+        // Remove values that don't start with a numeric digit
+        let answersFiltered = answersTrimed.filter(el => !isNaN(el));
+        //eliminar cualquier respuesta que tenga mas de 1 caracter de longitud 
+        answersFiltered = answersFiltered.filter(el => el.length === 1);
+        // Convert values to numbers and calculate the average
+        let sum = answersFiltered.reduce((acc, val) => acc + Number(val), 0);
+        let average = sum / answersFiltered.length;
+        answersObject[category] = average;
+        //redondeado a 2 decimales
+        answersObject[category] = Math.round(average * 100) / 100;
+    }
+
+    console.log(answersObject);
     
-    console.log("media turiscool", average);
+    //calcular la media general sumando las medias de cada categoria y dividiendo por el numero de categorias
+    let sum = 0;
+    for (let category in answersObject) {
+        sum += answersObject[category];
+    }
+    generalAverage = sum / Object.keys(answersObject).length;
+    generalAverage = Math.round(generalAverage * 100) / 100;
+    console.log("generalAverage", generalAverage);
+}
 
+async function start() {
+    await fetchCourseMeta();
+    await filterCoursesByCategory();
+    const categoryUnitsMap = createObjectWithCategoriesAndUnitIds();
+    await recoverySurveyInfoByCategory();
 
 }
 
